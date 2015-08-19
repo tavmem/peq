@@ -15,8 +15,7 @@ p003: {
 
  /Largest palindrome from product of two 3-digit numbers
 p004: {
- a:100+til 900;
- b:a*/:a;
+ b:a*/:a:100+til 900;
  c:b[0]; i:1; do[-1+count b; c:c,b[i]; i+:1]; c:distinct c;
  max c@where{x~reverse x} each string c}
 
@@ -25,3 +24,9 @@ p005: {prd 2 2 2 2 3 3 5 7 11 13 17 19}
 
  /(Sum squares of first 100) - (Square of sum)
 p006: {((sum a) xexp 2)-sum a*a:1+til 100}
+
+ /Utility function: All primes below x
+primes:{$[x<4;enlist 2;r,raze (enlist 1)cut where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}
+
+ /10001st prime number
+p007: {a:primes 105000; a[10000]}
