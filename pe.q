@@ -8,9 +8,8 @@ p002:{
 
  /Largest prime factor of 600851475143
 p003: {
- p:600851475143;
  f:{x mod'til floor 1+sqrt x};
- d:where not f p;
+ d:where not f 600851475143;
  t:min each raze(enlist 2)cut/:f each d; t[where t=0W]:1;
  max d@where t}
 
@@ -20,3 +19,9 @@ p004: {
  b:a*/:a;
  c:b[0]; i:1; do[-1+count b; c:c,b[i]; i+:1]; c:distinct c;
  max c@where{x~reverse x} each string c}
+
+ /Smallest positive number evenly divisible by 1 to 20
+p005: {prd 2 2 2 2 3 3 5 7 11 13 17 19}
+
+ /(Sum squares of first 100) - (Square of sum)
+p006: {((sum a) xexp 2)-sum a*a:1+til 100}
