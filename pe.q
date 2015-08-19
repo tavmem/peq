@@ -1,3 +1,10 @@
+ /UTILITY FUNCTIONS 
+ /All primes below x
+primes:{$[x<4;enlist 2;r,raze (enlist 1)cut where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}
+ /odometer with 2 columns
+od2:{(raze x#'a),'(x*x)#a:til x}
+
+ /EULER PROBLEMS
  /Sum of all multiples of 3 or 5 below 1000
 p001:{sum where not min(til 1000)mod/:3 5}
 
@@ -25,9 +32,6 @@ p005: {prd 2 2 2 2 3 3 5 7 11 13 17 19}
  /(Sum squares of first 100) - (Square of sum)
 p006: {((sum a) xexp 2)-sum a*a:1+til 100}
 
- /Utility function: All primes below x
-primes:{$[x<4;enlist 2;r,raze (enlist 1)cut where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}
-
  /10001st prime number
 p007: {a:primes 105000; a[10000]}
 
@@ -54,3 +58,8 @@ p008: {
  n:n,0 5 8 8 6 1 1 6 4 6 7 1 0 9 4 0 5 0 7 7 5 4 1 0 0 2 2 5 6 9 8 3 1 5 5 2 0 0 0 5 5 9 3 5 7 2 9 7 2 5;
  n:n,7 1 6 3 6 2 6 9 5 6 1 8 8 2 6 7 0 4 2 8 2 5 2 4 8 3 6 0 0 8 2 3 2 5 7 5 3 0 4 2 0 7 5 2 9 6 3 4 5 0;
  max prd flip {x@(til 13)+/:til -12+count x}n}
+
+ /Product abc for Pythagorean triplet where a+b+c = 1000
+p009: {
+ c:b,'sqrt sum each b*b:od2 500;
+ prd first floor each c@where 1000=sum each c}
