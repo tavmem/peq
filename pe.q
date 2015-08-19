@@ -5,38 +5,38 @@ primes:{$[x<4;enlist 2;r,raze (enlist 1)cut where not max x#/: not til each r:.z
 od2:{(raze x#'a),'(x*x)#a:til x}
 
  /EULER PROBLEMS
- /Sum of all multiples of 3 or 5 below 1000
+ /Sum all multiples of 3 or 5 below 1000
 p001:{sum where not min(til 1000)mod/:3 5}
 
- /Sum of even-valued Fibonacci terms under 4 million
+ /Sum even-valued Fibonacci terms under 4 million
 p002:{
  r:1; while[4e6>sum -2#r;r:r,sum -2#r];
  sum{x@where not x mod 2}r}
 
  /Largest prime factor of 600851475143
-p003: {
+p003:{
  f:{x mod'til floor 1+sqrt x};
  d:where not f 600851475143;
  t:min each raze(enlist 2)cut/:f each d; t[where t=0W]:1;
  max d@where t}
 
  /Largest palindrome from product of two 3-digit numbers
-p004: {
+p004:{
  b:a*/:a:100+til 900;
  c:b[0]; i:1; do[-1+count b; c:c,b[i]; i+:1]; c:distinct c;
  max c@where{x~reverse x} each string c}
 
  /Smallest positive number evenly divisible by 1 to 20
-p005: {prd 2 2 2 2 3 3 5 7 11 13 17 19}
+p005:{prd 2 2 2 2 3 3 5 7 11 13 17 19}
 
  /(Sum squares of first 100) - (Square of sum)
-p006: {((sum a) xexp 2)-sum a*a:1+til 100}
+p006:{((sum a) xexp 2)-sum a*a:1+til 100}
 
  /10001st prime number
-p007: {a:primes 105000; a[10000]}
+p007:{a:primes 105000; a[10000]}
 
  /Greatest product of 13 adjacent digits
-p008: {
+p008:{
  n:  7 3 1 6 7 1 7 6 5 3 1 3 3 0 6 2 4 9 1 9 2 2 5 1 1 9 6 7 4 4 2 6 5 7 4 7 4 2 3 5 5 3 4 9 1 9 4 9 3 4;
  n:n,9 6 9 8 3 5 2 0 3 1 2 7 7 4 5 0 6 3 2 6 2 3 9 5 7 8 3 1 8 0 1 6 9 8 4 8 0 1 8 6 9 4 7 8 8 5 1 8 4 3;
  n:n,8 5 8 6 1 5 6 0 7 8 9 1 1 2 9 4 9 4 9 5 4 5 9 5 0 1 7 3 7 9 5 8 3 3 1 9 5 2 8 5 3 2 0 8 8 0 5 5 1 1;
@@ -60,6 +60,9 @@ p008: {
  max prd flip {x@(til 13)+/:til -12+count x}n}
 
  /Product abc for Pythagorean triplet where a+b+c = 1000
-p009: {
+p009:{
  c:b,'sqrt sum each b*b:od2 500;
  prd first floor each c@where 1000=sum each c}
+
+ /Sum primes below 2 million
+p010:{sum primes 2000000}
