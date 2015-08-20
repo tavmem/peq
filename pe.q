@@ -94,3 +94,9 @@ p011:{
  e:{s:((count x),20)#0; i:0; do[count x;s[i;]:20#x[i;],20#0;i+:1];s};
  i:{$[4>count x;x;prd each x@(til 4)+/:til -3+count x]}; 
  max((raze i each n),(raze i each flip n),(raze i each e d n),(raze i each e d@reverse n))}
+
+ /First triangle number with over 500 divisors
+p012:{
+ f:{floor x*(x+1)%2};
+ c:1; r:0; while[r<500; r:count{d:where not x mod til floor 1+sqrt x;d,floor x%reverse d}f c+:1];
+ f@c}
