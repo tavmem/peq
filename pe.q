@@ -1,6 +1,6 @@
  /UTILITY FUNCTIONS 
  /All primes below x
-primes:{$[x<4;enlist 2;r,raze (enlist 1)cut where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}
+primes:{$[x<4;enlist 2;r,raze 1_where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}
  /odometer with 2 columns
 od2:{(raze x#'a),'(x*x)#a:til x}
 
