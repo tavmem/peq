@@ -84,4 +84,7 @@ p014:{
  a?max a}
 
 p015:{prd 2 13 2 37 33 31 29 5 23 21}
- /Number of routes through a 20x20 grid. This is the binomial coefficient of (40 over 20), which reduces to the above.
+ /Number of routes through a 20x20 grid. Binomial coefficient of (40 over 20), which reduces to the above.
+
+p016:{r:1; do[1000; r*:2; r:(first where r)_ r:((r>9),0)+0,r mod 10;]; sum r}
+ /Sum of digits of (2 xexp 1000)
