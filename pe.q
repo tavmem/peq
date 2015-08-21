@@ -2,8 +2,10 @@
 
  /All primes below x
 primes:{$[x<4;enlist 2;r,raze 1_where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}
- /odometer with 2 columns
+ /Odometer with 2 columns
 od2:{(raze x#'a),'(x*x)#a:til x}
+ /Next term in Collatz sequence 
+clz:{$[x mod 2;1+3*x;floor x%2]};
 
  /EULER PROBLEMS
 
@@ -72,3 +74,11 @@ p013:{
  do[50; t:c+sum("I"$n[;49-i],'" "); s[51-i]:first -1#string t; c:floor t%10; i+:1];
  s[0 1]:-2#string c;
  "J"$10#s}
+
+p014:{
+ /Starting number (under 1 million) for Longest Collatz sequence
+ a:{
+  C:-1 1,(x-2)#0; i:0;
+  do[x; if[not C@i; b:where x>j:((i-1)<)clz\i; C[j@b]:C[first reverse j]+(reverse til count j)@b]; i+:1];
+  C}@1000000;
+ a?max a}
