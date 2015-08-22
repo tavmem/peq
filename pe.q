@@ -2,6 +2,7 @@
 
 primes:{$[x<4;enlist 2;r,raze 1_where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}  /primes below x
 clz:{$[x mod 2;1+3*x;floor x%2]}  /Next term in Collatz sequence
+echpr:{$[1<count x; flip (-1_ x),'1_ x; x]}   /Each Pair
 
 
 /PROBLEMS
@@ -43,7 +44,7 @@ p008:{
 
 /Product abc for Pythagorean triplet where a+b+c = 1000
 p009:{
- c:b,'sqrt sum each b*b:(til 500)cross til 500;
+ c:b,'sqrt sum each b*b:{x cross x}til 500;
  prd first floor each c@where 1000=sum each c}
 
 /Sum primes below 2 million
@@ -53,7 +54,7 @@ p010:{sum primes 2000000}
 p011:{
  t:read0 `t011.txt;
  n:20 20#0; j:0; do[20; n[j]:"J"$3 cut t[j]; j+:1];
- d:{x ./:/:a@-1_1_value group sum each a:(til count x)cross til count x};
+ d:{x ./:/:a@-1_1_value group sum each a:{x cross x}til count x};
  e:{s:((count x),20)#0; i:0; do[count x;s[i;]:20#x[i;],20#0;i+:1];s};
  i:{$[4>count x;x;prd each x@(til 4)+/:til -3+count x]}; 
  max((raze i each n),(raze i each flip n),(raze i each e d n),(raze i each e d@reverse n))}
