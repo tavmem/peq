@@ -1,11 +1,10 @@
- /UTILITY FUNCTIONS
+/UTILITY FUNCTIONS
 
- /All primes below x
-primes:{$[x<4;enlist 2;r,raze 1_where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}
- /Next term in Collatz sequence 
-clz:{$[x mod 2;1+3*x;floor x%2]};
+primes:{$[x<4;enlist 2;r,raze 1_where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}  /primes below x
+clz:{$[x mod 2;1+3*x;floor x%2]}  /Next term in Collatz sequence
 
- /PROBLEMS
+
+/PROBLEMS
 
 /Sum all multiples of 3 or 5 below 1000
 p001:{sum where not min(til 1000)mod/:3 5}
@@ -92,5 +91,5 @@ p017:{
  m:string``one`two`three`four`five`six`seven`eight`nine;
  m,:(string`ten`eleven`twelve),(string`thir`four`fif`six`seven`eigh`nine),\:"teen";
  m,:raze((string`twen`thir`for`fif`six`seven`eigh`nine),\:"ty"),/:\:10#m;
- m,:raze (m[1+til 9],\:"hundred"),/:\:(enlist ""),"and",/:m 1+til 99;       /problem
+ m,:raze (m[1+til 9],\:"hundred"),/:\:(enlist ""),"and",/:m 1+til 99;
  sum count each m,:m[1],"thousand"}
