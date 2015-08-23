@@ -23,10 +23,7 @@ p003:{
  max d@where t}
 
 /Largest palindrome from product of two 3-digit numbers
-p004:{
- b:a*/:a:100+til 900;
- c:b[0]; i:1; do[-1+count b; c:c,b[i]; i+:1]; c:distinct c;
- max c@where{x~reverse x} each string c}
+p004:{max m@where{x~reverse x}each string m:distinct raze n*/:\:n:100+til 900}
 
 /Smallest positive number evenly divisible by 1 to 20
 p005:{prd 2 2 2 2 3 3 5 7 11 13 17 19}
