@@ -2,6 +2,7 @@
 
 primes:{$[x<4;enlist 2;r,raze 1_where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}  /primes below x
 clz:{$[x mod 2;1+3*x;floor x%2]}  /Next term in Collatz sequence
+echPr:{$[1<count x; flip (-1_ x),'1_ x; x]}   /Each Pair
 
 
 /PROBLEMS
@@ -98,5 +99,4 @@ p017:{
 p018:{
  t:read0 `t018.txt;
  n:15#(3;`a); n[0]:"J"$t[0]; i:1; do[14; n[i]:"J"$3 cut t[i]; i+:1]; n:reverse n;
- i:1; r:n[0]; do[-2+count n; r:{max flip (x+1_ y),'x+ -1_ y}[n[i];r]; i+:1];
- max r+n[-1+count n]}
+ first 0{y+max echPr x}/n}
