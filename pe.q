@@ -1,8 +1,18 @@
 /UTILITY FUNCTIONS
 
-primes:{$[x<4;enlist 2;r,raze 1_where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}  /primes below x
-clz:{$[x mod 2;1+3*x;floor x%2]}  /Next term in Collatz sequence
-echPr:{$[1<count x; flip (-1_ x),'1_ x; x]}   /Each Pair
+/primes below x
+primes:{$[x<4;enlist 2;r,raze 1_where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}
+
+/Next term in Collatz sequence
+clz:{$[x mod 2;1+3*x;floor x%2]}
+
+/Each Pair
+echPr:{$[1<count x; flip (-1_ x),'1_ x; x]}
+
+/(d)ays (b)y (m)onth (i)n any (y)ear
+dbmiy:{
+ m:31 28 31 30 31 30 31 31 30 31 30 31;
+ @[m;1;+;{(not x mod 400)|(not x mod 4)&(not not x mod 100)}x]}
 
 
 /PROBLEMS
@@ -97,3 +107,8 @@ p018:{
  t:read0 `t018.txt;
  n:15#(::); n[0]:"J"$t[0]; i:1; do[14; n[i]:"J"$3 cut t[i]; i+:1]; n:reverse n;
  first 0{y+max echPr x}/n}
+
+/Number of Sundays on the first of the month in the 20th century
+p019:{
+ n:0+\raze dbmiy each 1900+til 101;
+ count n@where(6=n mod 7)&n>365}
