@@ -98,5 +98,5 @@ p017:{
 /Max total from top to bottom of triangle
 p018:{
  t:read0 `t018.txt;
- n:15#(3;`a); n[0]:"J"$t[0]; i:1; do[14; n[i]:"J"$3 cut t[i]; i+:1]; n:reverse n;
+ n:15#(::); n[0]:"J"$t[0]; i:1; do[14; n[i]:"J"$3 cut t[i]; i+:1]; n:reverse n;
  first 0{y+max echPr x}/n}
