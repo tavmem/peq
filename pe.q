@@ -39,7 +39,7 @@ p004:{max m@where{x~reverse x}each string m:distinct raze n*/:\:n:100+til 900}
 p005:{prd 2 2 2 2 3 3 5 7 11 13 17 19}
 
 /(Sum squares of first 100) - (Square of sum)
-p006:{((sum a) xexp 2)-sum a*a:1+til 100}
+p006:{floor((sum a) xexp 2)-sum a*a:1+til 100}
 
 /10001st prime number
 p007:{a:primes 105000; a[10000]}
@@ -112,3 +112,11 @@ p018:{
 p019:{
  n:0+\raze dbmiy each 1900+til 101;
  count n@where(6=n mod 7)&n>365}
+
+/Sum of digits of 100 factorial
+p020:{
+ a:31#0; a[0]:prd 1+til 12; i:13;
+ while[i<101; a*:i; 
+  while[0<sum b:a>999999999; k:first where b=1; r:floor(a[k]-a[k] mod 1e6)%1e6; a[k]:a[k] mod 1000000; a[k+1]+:r];
+  i+:1];
+ sum "J"$(raze string a),'" "}
