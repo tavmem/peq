@@ -120,3 +120,8 @@ p020:{
   while[0<sum b:a>999999999; k:first where b=1; r:floor(a[k]-a[k] mod 1e6)%1e6; a[k]:a[k] mod 1000000; a[k+1]+:r];
   i+:1];
  sum "J"$(raze string a),'" "}
+
+/Sum of all amicable numbers under 10000
+p021:{
+ d:sum each{d@where not x mod d:1_ til 1+floor .5*x}each til n:10000;
+ sum c@where not d[c]=c:where (til n)=d[d[til n]]}
