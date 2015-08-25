@@ -1,3 +1,7 @@
+/LOAD DATA for Problem 22
+\l t022.q
+
+
 /UTILITY FUNCTIONS
 
 /primes below x
@@ -13,6 +17,13 @@ echPr:{$[1<count x; flip (-1_ x),'1_ x; x]}
 dbmiy:{
  m:31 28 31 30 31 30 31 31 30 31 30 31;
  @[m;1;+;{(not x mod 400)|(not x mod 4)&(not not x mod 100)}x]}
+
+/This function was used to format the data for problem 22
+fmt022:{
+ t:raze read0 `t022.txt;
+ f:"t022:(",ssr[t;",";";"],")";
+ `:t022.q 0: enlist f;
+ }
 
 
 /PROBLEMS
@@ -125,3 +136,6 @@ p020:{
 p021:{
  d:sum each{d@where not x mod d:1_ til 1+floor .5*x}each til n:10000;
  sum c@where not d[c]=c:where (til n)=d[d[til n]]}
+
+/Total of all the name scores
+p022:{sum(1+til count t)*sum each -64+6h$t:t022[iasc(t022)]}
