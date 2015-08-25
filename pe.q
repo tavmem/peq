@@ -146,3 +146,6 @@ p023:{
  b:raze a+/:a:1_ where{x<sum{distinct 7h$1,d,x%d:c@where not x mod c:1+1_ til floor sqrt x} x}each til m;
  n[b[where m>b]]:0;
  sum where n}
+
+/Millionth lexographic permutation of digits 0,1,2,3,4,5,6,7,8,9
+p024:{({$[1<x; raze (idesc each(x,x)#1,x#0)[;0,' 1+.z.s[x-1]]; enlist 0]}10)[999999]}
