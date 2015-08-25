@@ -153,3 +153,5 @@ p024:{({$[1<x; raze (idesc each(x,x)#1,x#0)[;0,' 1+.z.s[x-1]]; enlist 0]}10)[999
 /Index of the first term in Fibonacci sequence to contain 1000 digits
 p025:{floor .5+((log(sqrt 5)) + 999*log(10)) % (log((1+sqrt(5)) % 2))}
 
+/d<100 for which 1%d contains the longest recurring cycle in its decimal fraction part
+p026:{1+first idesc{i:1; r:(); while[not(j:(i*10)mod x) in r; r,:j; i:j]; count r}each 1+til 1000}
