@@ -149,3 +149,7 @@ p023:{
 
 /Millionth lexographic permutation of digits 0,1,2,3,4,5,6,7,8,9
 p024:{({$[1<x; raze (idesc each(x,x)#1,x#0)[;0,' 1+.z.s[x-1]]; enlist 0]}10)[999999]}
+
+/Index of the first term in Fibonacci sequence to contain 1000 digits
+p025:{floor .5+((log(sqrt 5)) + 999*log(10)) % (log((1+sqrt(5)) % 2))}
+
