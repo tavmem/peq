@@ -139,3 +139,10 @@ p021:{
 
 /Total of all the name scores
 p022:{sum(1+til count t)*sum each -64+6h$t:t022[iasc(t022)]}
+
+/Sum of all positive integers that are not the sum of 2 abundant numbers
+p023:{
+ m:28123; n:m#1;
+ b:raze a+/:a:1_ where{x<sum{distinct 7h$1,d,x%d:c@where not x mod c:1+1_ til floor sqrt x} x}each til m;
+ n[b[where m>b]]:0;
+ sum where n}
