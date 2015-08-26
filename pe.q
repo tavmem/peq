@@ -163,3 +163,6 @@ p027:{
  do[count c; av:80#c[i;0]; bv:80#c[i;1]; d:{[n;av;bv](n*n)+(av*n)+bv}[n;av;bv];
   r[i]:count d[where (0<d)&(d<5000)&d in p]; i+:1];
  prd raze c[where r=max r]}
+
+/Sum of the numbers on the diagonals in a 1001 by 1001 spiral
+p028:{1+sum {(4*x*x)+(-6*x)+6}each 3+2*til 500}
