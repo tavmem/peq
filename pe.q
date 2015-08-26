@@ -155,3 +155,11 @@ p025:{floor .5+((log(sqrt 5)) + 999*log(10)) % (log((1+sqrt(5)) % 2))}
 
 /d<100 for which 1%d contains the longest recurring cycle in its decimal fraction part
 p026:{1+first idesc{i:1; r:(); while[not(j:(i*10)mod x) in r; r,:j; i:j]; count r}each 1+til 1000}
+
+/Product of coefficients, a and b, for the quadratic (n*n)+(b*x)+c that produces the max number of primes
+/likely assumptions: a,b are primes, bigger b is better, n<5000 is sufficient, max primes produced is < 80. 
+p027:{
+ b:a[where 900<a:primes 1000];  a:(reverse(-)a),a; c:a cross b; r:(count c)#0; p:primes 5000; i:0; n:til 80;
+ do[count c; av:80#c[i;0]; bv:80#c[i;1]; d:{[n;av;bv](n*n)+(av*n)+bv}[n;av;bv];
+  r[i]:count d[where (0<d)&(d<5000)&d in p]; i+:1];
+ prd raze c[where r=max r]}
