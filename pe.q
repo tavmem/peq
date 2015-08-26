@@ -5,28 +5,31 @@
 /UTILITY FUNCTIONS
 
 /primes below x
-primes:{$[x<4;enlist 2;r,raze 1_where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}
+Primes:{$[x<4;enlist 2;r,raze 1_where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}
 
 /Next term in Collatz sequence
-clz:{$[x mod 2;1+3*x;floor x%2]}
+Clz:{$[x mod 2;1+3*x;floor x%2]}
 
 /Each Pair
 echPr:{$[1<count x; flip (-1_ x),'1_ x; x]}
 
 /(d)ays (b)y (m)onth (i)n any (y)ear
-dbmiy:{
+Dbmiy:{
  m:31 28 31 30 31 30 31 31 30 31 30 31;
  @[m;1;+;{(not x mod 400)|(not x mod 4)&(not not x mod 100)}x]}
 
 /This function was used to format the data for problem 22
-fmt022:{
+Fmt022:{
  t:raze read0 `t022.txt;
  f:"t022:(",ssr[t;",";";"],")";
  `:t022.q 0: enlist f;
  }
 
-/(s)orted (d)istinct (fl)oats 
-sdfl:{n[where n<>-1_0,n:x[iasc x]]}
+/(s)orted (D)istinct (fl)oats 
+sDfl:{n[where n<>-1_0,n:x[iasc x]]}
+
+/(D)igits from (p)ositive (i)ntegers
+Dfpi:{"J"$(string x),'" "}
 
 
 /PROBLEMS
@@ -56,7 +59,7 @@ p005:{prd 2 2 2 2 3 3 5 7 11 13 17 19}
 p006:{floor((sum a) xexp 2)-sum a*a:1+til 100}
 
 /10001st prime number
-p007:{a:primes 105000; a[10000]}
+p007:{a:Primes 105000; a[10000]}
 
 /Greatest product of 13 adjacent digits
 p008:{
@@ -69,7 +72,7 @@ p009:{
  prd first floor each c@where 1000=sum each c}
 
 /Sum primes below 2 million
-p010:{sum primes 2000000}
+p010:{sum Primes 2000000}
 
 /Greatest product of 4 adjacent numbers
 p011:{
@@ -98,7 +101,7 @@ p013:{
 p014:{
  a:{
   C:-1 1,(x-2)#0; i:0;
-  do[x; if[not C@i; b:where x>j:((i-1)<)clz\i; C[j@b]:C[first reverse j]+(reverse til count j)@b]; i+:1];
+  do[x; if[not C@i; b:where x>j:((i-1)<)Clz\i; C[j@b]:C[first reverse j]+(reverse til count j)@b]; i+:1];
   C}@1000000;
  a?max a}
 
@@ -124,7 +127,7 @@ p018:{
 
 /Number of Sundays on the first of the month in the 20th century
 p019:{
- n:0+\raze dbmiy each 1900+til 101;
+ n:0+\raze Dbmiy each 1900+til 101;
  count n@where(6=n mod 7)&n>365}
 
 /Sum of digits of 100 factorial
@@ -160,9 +163,9 @@ p025:{floor .5+((log(sqrt 5)) + 999*log(10)) % (log((1+sqrt(5)) % 2))}
 p026:{1+first idesc{i:1; r:(); while[not(j:(i*10)mod x) in r; r,:j; i:j]; count r}each 1+til 1000}
 
 /Product of coefficients, a and b, for the quadratic (n*n)+(b*x)+c that produces the max number of primes
-/likely assumptions: a,b are primes, bigger b is better, n<5000 is sufficient, max primes produced is < 80. 
+/assumptions: a,b are primes, bigger b is better, n<5000 is sufficient, max primes produced is < 80. 
 p027:{
- b:a[where 900<a:primes 1000];  a:(reverse(-)a),a; c:a cross b; r:(count c)#0; p:primes 5000; i:0; n:til 80;
+ b:a[where 900<a:Primes 1000];  a:(reverse(-)a),a; c:a cross b; r:(count c)#0; p:Primes 5000; i:0; n:til 80;
  do[count c; av:80#c[i;0]; bv:80#c[i;1]; d:{[n;av;bv](n*n)+(av*n)+bv}[n;av;bv];
   r[i]:count d[where (0<d)&(d<5000)&d in p]; i+:1];
  prd raze c[where r=max r]}
@@ -171,4 +174,7 @@ p027:{
 p028:{1+sum {(4*x*x)+(-6*x)+6}each 3+2*til 500}
 
 /Count distinct terms in the generated sequence
-p029:{count sdfl raze n xexp/:n:2+til 99}
+p029:{count sDfl raze n xexp/:n:2+til 99}
+
+/Sum of all numbers that can be written as the sum of fifth powers of their digits
+p030:{sum 2_ where{x=sum(Dfpi x)xexp 5}each til floor 6*9 xexp 5}
