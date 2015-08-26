@@ -25,6 +25,9 @@ fmt022:{
  `:t022.q 0: enlist f;
  }
 
+/(s)orted (d)istinct (fl)oats 
+sdfl:{n[where n<>-1_0,n:x[iasc x]]}
+
 
 /PROBLEMS
 
@@ -167,6 +170,5 @@ p027:{
 /Sum of the numbers on the diagonals in a 1001 by 1001 spiral
 p028:{1+sum {(4*x*x)+(-6*x)+6}each 3+2*til 500}
 
-/Count distinct terms are in the generated sequence
-/Notes: function distinct not fully removing duplicates in 32-bit version 3.3
-p029:{n:distinct raze p xexp/:p:2+til 99; n:n[iasc n]; count n:n[where not n=1_ n,0]}
+/Count distinct terms in the generated sequence
+p029:{count sdfl raze n xexp/:n:2+til 99}
