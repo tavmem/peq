@@ -1,0 +1,32 @@
+tom@xps ~/q/l32 $ rlwrap ./q
+KDB+ 3.3 2015.06.09 Copyright (C) 1993-2015 Kx Systems
+l32/ 2()core 2018MB tom xps 127.0.0.1 NONEXPIRE  
+
+Welcome to kdb+ 32bit edition
+For support please see http://groups.google.com/d/forum/personal-kdbplus
+Tutorials can be found at http://code.kx.com/wiki/Tutorials
+To exit, type \\
+To remove this startup msg, edit q.q
+q)\c 3 500
+
+q)count distinct raze p xexp/:p:2+til 99
+9240
+
+q)n:distinct raze p xexp/:p:2+til 99; n:n[iasc n]
+q)31#n
+4 8 9 16 25 27 32 36 49 64 81 100 121 125 128 144 169 196 216 225 243 256 289 324 343 361 400 441 484 512 512f
+
+q)n[29 30]
+512 512f
+
+q)n:distinct n
+q)count n
+9240
+q)n[29 30]
+512 512f
+q)n[29]=n[30]
+1b
+q)n[29]~n[30]
+1b
+q)
+
