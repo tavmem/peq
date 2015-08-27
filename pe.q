@@ -1,5 +1,7 @@
 /LOAD DATA for Problem 22
-\l t022.q
+
+k) kssr:{,/@[x;1+2*!_.5*#x:(0,/(0,{n:x?"[";$[n=#x;n;n+.z.s$[(#x)=p:x?"]";'"unmatched ]";p]_x:(n+2+"^"=x n+1)_x]}y,"")+/:x ss y)_x;$[100h>@z;:[;z];z]]}
+k) t022:."(",kssr[*0:`t022.txt;",";";"],")"
 
 
 /UTILITY FUNCTIONS
@@ -17,9 +19,6 @@ echPr:{$[1<count x; flip (-1_ x),'1_ x; x]}
 Dbmiy:{
  m:31 28 31 30 31 30 31 31 30 31 30 31;
  @[m;1;+;{(not x mod 400)|(not x mod 4)&(not not x mod 100)}x]}
-
-/This function was used to format the data for problem 22
-Fmt022:{`:t022.q 0: enlist "t022:(",ssr[raze read0 `t022.txt;",";";"],")";}
 
 /(s)orted (D)istinct (fl)oats 
 sDfl:{n[where n<>-1_0,n:x[iasc x]]}
