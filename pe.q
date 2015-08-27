@@ -1,6 +1,3 @@
-/LOAD DATA for Problem 22
-t022:eval parse "(",ssr[raze read0 `t022.txt;",";";"],")"
-
 /UTILITY FUNCTIONS
 
 /primes below x
@@ -136,8 +133,9 @@ p021:{
  sum c@where not d[c]=c:where (til n)=d[d[til n]]}
 
 /Total of all the name scores
-p022:{sum(1+til count t)*sum each -64+"i"$t:t022[iasc(t022)]}
-
+p022:{
+ d:eval parse "(",ssr[raze read0 `t022.txt;",";";"],")";
+ sum(1+til count d)*sum each -64+"i"$d[iasc(d)]}
 
 /Sum of all positive integers that are not the sum of 2 abundant numbers
 p023:{
