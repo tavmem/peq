@@ -1,28 +1,26 @@
 /LOAD DATA for Problem 22
-t022:"(",ssr[raze read0 `t022.txt;",";";"],")";
-k)t022:."",t022
-
+t022:eval parse "(",ssr[raze read0 `t022.txt;",";";"],")"
 
 /UTILITY FUNCTIONS
 
 /primes below x
 Primes:{$[x<4;enlist 2;r,raze 1_where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}
 
-/Next term in Collatz sequence
+/next term in Collatz sequence
 Clz:{$[x mod 2;1+3*x;floor x%2]}
 
-/Each Pair
+/each pair
 echPr:{$[1<count x; flip (-1_ x),'1_ x; x]}
 
-/(d)ays (b)y (m)onth (i)n any (y)ear
+/days by month in any year
 Dbmiy:{
  m:31 28 31 30 31 30 31 31 30 31 30 31;
  @[m;1;+;{(not x mod 400)|(not x mod 4)&(not not x mod 100)}x]}
 
-/(s)orted (D)istinct (fl)oats 
+/sorted Distinct floats 
 sDfl:{n[where n<>-1_0,n:x[iasc x]]}
 
-/(D)igits from (p)ositive (i)ntegers
+/Digits from positive integers
 Dfpi:{"J"$(string x),'" "}
 
 
@@ -139,6 +137,7 @@ p021:{
 
 /Total of all the name scores
 p022:{sum(1+til count t)*sum each -64+"i"$t:t022[iasc(t022)]}
+
 
 /Sum of all positive integers that are not the sum of 2 abundant numbers
 p023:{
