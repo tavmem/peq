@@ -172,3 +172,6 @@ p030:{sum 2_ where{x=sum(Dfpi x)xexp 5}each til floor 6*9 xexp 5}
 
 /Number of different ways that 2 British pounds can be made using any number of coins
 p031:{{$[x=0; :1; (x<0)|y=0; :0; .z.s[x;y-1]+.z.s[x-(1 2 5 10 20 50 100 200)[y-1];y]]}[200;8]}
+
+/Pandigital Products
+p032:{ sum distinct raze raze(til 10000;til 10000){r*"123456789"~{x@iasc[x]}@ raze string x,y,r:x*y}/:\:'(1+til 9;11+til 89)}
