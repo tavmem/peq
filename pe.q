@@ -1,7 +1,6 @@
 /LOAD DATA for Problem 22
-
-k) kssr:{,/@[x;1+2*!_.5*#x:(0,/(0,{n:x?"[";$[n=#x;n;n+.z.s$[(#x)=p:x?"]";'"unmatched ]";p]_x:(n+2+"^"=x n+1)_x]}y,"")+/:x ss y)_x;$[100h>@z;:[;z];z]]}
-k) t022:."(",kssr[*0:`t022.txt;",";";"],")"
+t022:"(",ssr[raze read0 `t022.txt;",";";"],")";
+k)t022:."",t022
 
 
 /UTILITY FUNCTIONS
@@ -139,7 +138,7 @@ p021:{
  sum c@where not d[c]=c:where (til n)=d[d[til n]]}
 
 /Total of all the name scores
-p022:{sum(1+til count t)*sum each -64+6h$t:t022[iasc(t022)]}
+p022:{sum(1+til count t)*sum each -64+"i"$t:t022[iasc(t022)]}
 
 /Sum of all positive integers that are not the sum of 2 abundant numbers
 p023:{
