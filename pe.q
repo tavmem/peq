@@ -17,8 +17,8 @@ Dbmiy:{
 /sorted Distinct floats 
 sDfl:{n[where n<>-1_0,n:x[iasc x]]}
 
-/Digits from positive integers
-Dfpi:{"J"$(string x),'" "}
+/Digits from integers
+Dfi:{"J"$(string abs x),'" "}
 
 
 /PROBLEMS
@@ -167,7 +167,7 @@ p028:{1+sum {(4*x*x)+(-6*x)+6}each 3+2*til 500}
 p029:{count sDfl raze n xexp/:n:2+til 99}
 
 /Digit fifth powers
-p030:{sum 2_ where{x=sum(Dfpi x)xexp 5}each til floor 6*9 xexp 5}
+p030:{sum 2_ where{x=sum(Dfi x)xexp 5}each til floor 6*9 xexp 5}
 
 /Coin sums
 p031:{{$[x=0; :1; (x<0)|y=0; :0; .z.s[x;y-1]+.z.s[x-(1 2 5 10 20 50 100 200)[y-1];y]]}[200;8]}
@@ -182,3 +182,8 @@ p033:{
  c:(1+til 9) cross 1+til 9; d:prd flip c; a:c[;0]; b:c[;1]; f:((10*d)-d)%(10*a)-b;
  r:c[where (f=floor f) & (f<>1) & (f<10) & a<>b];
  floor (prd r[;1])%prd r[;0]}
+
+/Digit factorials
+p034:{
+ f:prd each 1+til each til 10;
+ -3 + sum where{[f;t]t=sum f Dfi t}[f;]each til floor 1e6}
