@@ -1,7 +1,8 @@
 /UTILITY FUNCTIONS
 
 /primes below x
-Primes:{$[x<4;enlist 2;r,raze 1_where not max x#/: not til each r:.z.s[floor 1+sqrt x]]}
+Pr:{@[x#1; y*til each neg floor neg x%y; :; 0]}
+Primes:{[s;n]$[n<4; enlist 2; r,1_where s[n]r:.z.s[s]@neg floor neg sqrt n]}[Pr;]
 
 /next term in Collatz sequence
 Clz:{$[x mod 2;1+3*x;floor x%2]}
