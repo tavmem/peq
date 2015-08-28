@@ -23,47 +23,47 @@ Dfpi:{"J"$(string x),'" "}
 
 /PROBLEMS
 
-/Sum all multiples of 3 or 5 below 1000
+/Multiples of 3 and 5
 p001:{sum where not min(til 1000)mod/:3 5}
 
-/Sum even-valued Fibonacci terms under 4 million
+/Even Fibonacci numbers
 p002:{
  r:1; while[4e6>sum -2#r;r:r,sum -2#r];
  sum{x@where not x mod 2}r}
 
-/Largest prime factor of 600851475143
+/Largest prime factor
 p003:{
  f:{x mod'til floor 1+sqrt x};
  d:where not f 600851475143;
  t:min each raze(enlist 2)cut/:f each d; t[where t=0W]:1;
  max d@where t}
 
-/Largest palindrome from product of two 3-digit numbers
+/Largest palindrome product
 p004:{max m@where{x~reverse x}each string m:distinct raze n*/:\:n:100+til 900}
 
-/Smallest positive number evenly divisible by 1 to 20
+/Smallest multiple
 p005:{prd 2 2 2 2 3 3 5 7 11 13 17 19}
 
-/(Sum squares of first 100) - (Square of sum)
+/Sum square difference
 p006:{floor((sum a) xexp 2)-sum a*a:1+til 100}
 
-/10001st prime number
+/10001st prime
 p007:{a:Primes 105000; a[10000]}
 
-/Greatest product of 13 adjacent digits
+/Largest product in a series
 p008:{
  n:"J"$(raze read0 `t008.txt),'" ";
  max prd flip {x@(til 13)+/:til -12+count x}n}
 
-/Product abc for Pythagorean triplet where a+b+c = 1000
+/Special Pythagorean triplet
 p009:{
  c:b,'sqrt sum each b*b:{x cross x}til 500;
  prd first floor each c@where 1000=sum each c}
 
-/Sum primes below 2 million
+/Summation of primes
 p010:{sum Primes 2000000}
 
-/Greatest product of 4 adjacent numbers
+/Largest product in a grid
 p011:{
  t:read0 `t011.txt;
  n:20 20#0; j:0; do[20; n[j]:"J"$3 cut t[j]; j+:1];
@@ -72,13 +72,13 @@ p011:{
  i:{$[4>count x;x;prd each x@(til 4)+/:til -3+count x]}; 
  max((raze i each n),(raze i each flip n),(raze i each e d n),(raze i each e d@reverse n))}
 
-/First triangle number with over 500 divisors
+/Highly divisible triangular number
 p012:{
  f:{floor x*(x+1)%2};
  c:1; r:0; while[r<500; r:count{d:where not x mod til floor 1+sqrt x;d,floor x%reverse d}f c+:1];
  f@c}
 
-/First 10 digits of the sum of 100 numbers
+/Large sum
 p013:{
  n:read0 `t013.txt;
  i:0; s:52#"a"; c:0;
@@ -86,7 +86,7 @@ p013:{
  s[0 1]:-2#string c;
  "J"$10#s}
 
-/Starting number (under 1 million) for Longest Collatz sequence
+/Longest Collatz sequence
 p014:{
  a:{
   C:-1 1,(x-2)#0; i:0;
@@ -94,13 +94,13 @@ p014:{
   C}@1000000;
  a?max a}
 
-/Number of routes through a 20x20 grid. Binomial coefficient of (40 over 20), which reduces to:
+/Lattice paths. The binomial coefficient (40 over 20) reduces to
 p015:{prd 2 13 2 37 33 31 29 5 23 21}
 
-/Sum of digits of (2 xexp 1000)
+/Power digit sum
 p016:{r:1; do[1000; r*:2; r:(first where r)_ r:((r>9),0)+0,r mod 10;]; sum r}
 
-/Count letters in words 1 to 1000
+/Number letter counts
 p017:{
  m:string``one`two`three`four`five`six`seven`eight`nine;
  m,:(string`ten`eleven`twelve),(string`thir`four`fif`six`seven`eigh`nine),\:"teen";
@@ -108,18 +108,18 @@ p017:{
  m,:raze (m[1+til 9],\:"hundred"),/:\:(enlist ""),"and",/:m 1+til 99;
  sum count each m,:m[1],"thousand"}
 
-/Max total from top to bottom of triangle
+/Maximum path sum I
 p018:{
  t:read0 `t018.txt;
  n:15#(::); n[0]:"J"$t[0]; i:1; do[14; n[i]:"J"$3 cut t[i]; i+:1]; n:reverse n;
  first 0{y+max echPr x}/n}
 
-/Number of Sundays on the first of the month in the 20th century
+/Counting Sundays
 p019:{
  n:0+\raze Dbmiy each 1900+til 101;
  count n@where(6=n mod 7)&n>365}
 
-/Sum of digits of 100 factorial
+/Factorial digit sum
 p020:{
  a:31#0; a[0]:prd 1+til 12; i:13;
  while[i<101; a*:i; 
@@ -127,51 +127,58 @@ p020:{
   i+:1];
  sum "J"$(raze string a),'" "}
 
-/Sum of all amicable numbers under 10000
+/Amicable numbers
 p021:{
  d:sum each{d@where not x mod d:1_ til 1+floor .5*x}each til n:10000;
  sum c@where not d[c]=c:where (til n)=d[d[til n]]}
 
-/Total of all the name scores
+/Name scores
 p022:{
  d:eval parse "(",ssr[raze read0 `t022.txt;",";";"],")";
  sum(1+til count d)*sum each -64+"i"$d[iasc(d)]}
 
-/Sum of all positive integers that are not the sum of 2 abundant numbers
+/Non-abundant sums
 p023:{
  m:28123; n:m#1;
  b:raze a+/:a:1_ where{x<sum{distinct 7h$1,d,x%d:c@where not x mod c:1+1_ til floor sqrt x} x}each til m;
  n[b[where m>b]]:0;
  sum where n}
 
-/Millionth lexographic permutation of digits 0,1,2,3,4,5,6,7,8,9
+/Lexographic permutations
 p024:{({$[1<x; raze (idesc each(x,x)#1,x#0)[;0,' 1+.z.s[x-1]]; enlist 0]}10)[999999]}
 
-/Index of the first term in Fibonacci sequence to contain 1000 digits
+/1000-digit Fibonacci number
 p025:{floor .5+((log(sqrt 5)) + 999*log(10)) % (log((1+sqrt(5)) % 2))}
 
-/d<100 for which 1%d contains the longest recurring cycle in its decimal fraction part
+/Reciprocal cycles
 p026:{1+first idesc{i:1; r:(); while[not(j:(i*10)mod x) in r; r,:j; i:j]; count r}each 1+til 1000}
 
-/Product of coefficients, a and b, for the quadratic (n*n)+(b*x)+c that produces the max number of primes
-/assumptions: a,b are primes, bigger b is better, n<5000 is sufficient, max primes produced is < 80. 
+/Quadratic primes
 p027:{
  b:a[where 900<a:Primes 1000];  a:(reverse(-)a),a; c:a cross b; r:(count c)#0; p:Primes 5000; i:0; n:til 80;
  do[count c; av:80#c[i;0]; bv:80#c[i;1]; d:{[n;av;bv](n*n)+(av*n)+bv}[n;av;bv];
   r[i]:count d[where (0<d)&(d<5000)&d in p]; i+:1];
  prd raze c[where r=max r]}
 
-/Sum of the numbers on the diagonals in a 1001 by 1001 spiral
+/Number spiral diagonals
 p028:{1+sum {(4*x*x)+(-6*x)+6}each 3+2*til 500}
 
-/Count distinct terms in the generated sequence
+/Distinct powers
 p029:{count sDfl raze n xexp/:n:2+til 99}
 
-/Sum of all numbers that can be written as the sum of fifth powers of their digits
+/Digit fifth powers
 p030:{sum 2_ where{x=sum(Dfpi x)xexp 5}each til floor 6*9 xexp 5}
 
-/Number of different ways that 2 British pounds can be made using any number of coins
+/Coin sums
 p031:{{$[x=0; :1; (x<0)|y=0; :0; .z.s[x;y-1]+.z.s[x-(1 2 5 10 20 50 100 200)[y-1];y]]}[200;8]}
 
 /Pandigital Products
-p032:{ sum distinct raze raze(til 10000;til 10000){r*"123456789"~{x@iasc[x]}@ raze string x,y,r:x*y}/:\:'(1+til 9;11+til 89)}
+p032:{
+ t:(til 10000;til 10000){r*"123456789"~{x@iasc[x]}@ raze string x,y,r:x*y}/:\:'(1+til 9;11+til 89);
+ sum distinct raze raze t}
+
+/Digit cancelling fractions
+p033:{
+ c:(1+til 9) cross 1+til 9; d:prd flip c; a:c[;0]; b:c[;1]; f:((10*d)-d)%(10*a)-b;
+ r:c[where (f=floor f) & (f<>1) & (f<10) & a<>b];
+ floor (prd r[;1])%prd r[;0]}
