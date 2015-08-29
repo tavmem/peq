@@ -25,8 +25,11 @@ Dbmiy:{
 /sorted Distinct floats 
 sDfl:{n[where n<>-1_0,n:x[iasc x]]}
 
-/Digits from integers
-Dfi:{"J"$(string abs x),'" "}
+/Digits from integer
+Dfi:{"J"$(string x),'" "}
+
+/Binary digits from integer
+Bdfi:{Dfi raze (where b)_ b:0b vs x}
 
 
 /PROBLEMS
@@ -213,3 +216,6 @@ p035:{
  a:p[where 99999<p]; s:(5,count a)#0; s[0;]:(100000*a mod 10)+floor a%10;
  i:0; do[4; s[i+1;]:(100000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r:r,a[where min s in a];
  count r}
+
+/Double-base palindromes                                            \t 3094
+p036:{sum d@where p each Bdfi each d:where(p:{x~reverse x})each Dfi each til 1000000}
