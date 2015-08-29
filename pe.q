@@ -1,7 +1,7 @@
 /DESIGN CRITERIA
 / 1. Correct result (obviously)
 / 2. Speed (timings are on a 32-bit Pentium-4)
-/ 3. Space used (run with only 2G ram)
+/ 3. Space used (runs with only 2G ram)
 / 4. Style
 
 
@@ -202,18 +202,14 @@ p035:{
  p:Primes floor 1e6; p:p[where p>100]; p:p[where min each (Dfi each p)mod 2];
 
  a:p[where (99<p)&p<1000]; s:(2,count a)#0; s[0;]:(100*a mod 10)+floor a%10;
- s[1;]:(100*s[0;] mod 10)+floor s[0;]%10;
- r:r,a[where min s in a];
+ s[1;]:(100*s[0;] mod 10)+floor s[0;]%10; r:r,a[where min s in a];
 
  a:p[where (999<p)&p<10000]; s:(3,count a)#0; s[0;]:(1000*a mod 10)+floor a%10;
- i:0; do[2; s[i+1;]:(1000*s[i;] mod 10)+floor s[i;]%10; i+:1];
- r:r,a[where min s in a];
+ i:0; do[2; s[i+1;]:(1000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r:r,a[where min s in a];
 
  a:p[where (9999<p)&p<100000]; s:(4,count a)#0; s[0;]:(10000*a mod 10)+floor a%10;
- i:0; do[3; s[i+1;]:(10000*s[i;] mod 10)+floor s[i;]%10; i+:1];
- r:r,a[where min s in a];
+ i:0; do[3; s[i+1;]:(10000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r:r,a[where min s in a];
 
  a:p[where 99999<p]; s:(5,count a)#0; s[0;]:(100000*a mod 10)+floor a%10;
- i:0; do[4; s[i+1;]:(100000*s[i;] mod 10)+floor s[i;]%10; i+:1];
- r:r,a[where min s in a];
+ i:0; do[4; s[i+1;]:(100000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r:r,a[where min s in a];
  count r}
