@@ -188,3 +188,39 @@ p033:{
 p034:{
  f:prd each 1+til each til 10;
  -3 + sum where{[f;t]t=sum f Dfi t}[f;]each til floor 1e6}
+
+/Circular primes
+p035:{
+ r:2 3 5 7 11 13 17 31 37 71 73 79 97;
+ p:Primes floor 1e6; p:p[where p>100]; p:p[where min each (Dfi each p)mod 2];
+
+ a:p[where (99<p)&p<1000];
+ s:(2,count a)#0;
+ s[0;]:(100*a mod 10)+floor a%10;
+ s[1;]:(100*s[0;] mod 10)+floor s[0;]%10;
+ r:r,a[where min s in a];
+
+ a:p[where (999<p)&p<10000];
+ s:(3,count a)#0;
+ s[0;]:(1000*a mod 10)+floor a%10;
+ s[1;]:(1000*s[0;] mod 10)+floor s[0;]%10;
+ s[2;]:(1000*s[1;] mod 10)+floor s[1;]%10;
+ r:r,a[where min s in a];
+
+ a:p[where (9999<p)&p<100000];
+ s:(4,count a)#0;
+ s[0;]:(10000*a mod 10)+floor a%10;
+ s[1;]:(10000*s[0;] mod 10)+floor s[0;]%10;
+ s[2;]:(10000*s[1;] mod 10)+floor s[1;]%10;
+ s[3;]:(10000*s[2;] mod 10)+floor s[2;]%10;
+ r:r,a[where min s in a];
+
+ a:p[where 99999<p];
+ s:(5,count a)#0;
+ s[0;]:(100000*a mod 10)+floor a%10;
+ s[1;]:(100000*s[0;] mod 10)+floor s[0;]%10;
+ s[2;]:(100000*s[1;] mod 10)+floor s[1;]%10;
+ s[3;]:(100000*s[2;] mod 10)+floor s[2;]%10;
+ s[4;]:(100000*s[3;] mod 10)+floor s[3;]%10;
+ r:r,a[where min s in a];
+ count r}
