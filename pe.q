@@ -203,19 +203,29 @@ p034:{
 p035:{
  r:2 3 5 7 11 13 17 31 37 71 73 79 97;
  p:Primes floor 1e6; p:p[where p>100]; p:p[where min each (Dfi each p)mod 2];
-
  a:p[where (99<p)&p<1000]; s:(2,count a)#0; s[0;]:(100*a mod 10)+floor a%10;
- s[1;]:(100*s[0;] mod 10)+floor s[0;]%10; r:r,a[where min s in a];
-
+  s[1;]:(100*s[0;] mod 10)+floor s[0;]%10; r:r,a[where min s in a];
  a:p[where (999<p)&p<10000]; s:(3,count a)#0; s[0;]:(1000*a mod 10)+floor a%10;
- i:0; do[2; s[i+1;]:(1000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r:r,a[where min s in a];
-
+  i:0; do[2; s[i+1;]:(1000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r:r,a[where min s in a];
  a:p[where (9999<p)&p<100000]; s:(4,count a)#0; s[0;]:(10000*a mod 10)+floor a%10;
- i:0; do[3; s[i+1;]:(10000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r:r,a[where min s in a];
-
+  i:0; do[3; s[i+1;]:(10000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r:r,a[where min s in a];
  a:p[where 99999<p]; s:(5,count a)#0; s[0;]:(100000*a mod 10)+floor a%10;
- i:0; do[4; s[i+1;]:(100000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r:r,a[where min s in a];
+  i:0; do[4; s[i+1;]:(100000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r:r,a[where min s in a];
  count r}
 
 /Double-base palindromes                                            \t 3094
 p036:{sum d@where p each Bdfi each d:where(p:{x~reverse x})each Dfi each til 1000000}
+
+/Truncatable primes                                                 \t 247
+p037:{
+ p:Primes 1000000; p1:p[where p<10]; p2:p[where (9<p)&p<100]; p3:p[where (99<p)&p<1000]; p4:p[where (999<p)&p<10000];
+ p5:p[where (9999<p)&p<100000]; p6:p[where (99999<p)&p<1000000];
+ r:p2[where((p2 mod 10)in p1)&(floor p2%10)in p1];
+ r,:p3[where((p3 mod 10)in p1)&((p3 mod 100)in p2)&((floor p3%10)in p2)&(floor p3%100)in p1];
+ r,:p4[where((p4 mod 10)in p1)&((p4 mod 100)in p2)&((p4 mod 1000)in p3)&((floor p4%10)in p3)
+    &((floor p4%100)in p2)& (floor p4%1000)in p1];
+ r,:p5[where((p5 mod 10)in p1)&((p5 mod 100)in p2)&((p5 mod 1000)in p3)&((p5 mod 10000)in p4)
+    &((floor p5%10)in p4)& ((floor p5%100)in p3)&((floor p5%1000)in p2)& (floor p5%10000)in p1];
+ r,:p6[where((p6 mod 10)in p1)&((p6 mod 100)in p2)&((p6 mod 1000)in p3)&((p6 mod 10000)in p4)&((p6 mod 100000)in p5)
+    &((floor p6%10)in p5)&((floor p6%100)in p4)&((floor p6%1000)in p3)&((floor p6%10000)in p2)&(floor p6%100000)in p1];
+ sum r}
