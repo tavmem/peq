@@ -229,3 +229,11 @@ p037:{
  r,:p6[where((p6 mod 10)in p1)&((p6 mod 100)in p2)&((p6 mod 1000)in p3)&((p6 mod 10000)in p4)&((p6 mod 100000)in p5)
     &((floor p6%10)in p5)&((floor p6%100)in p4)&((floor p6%1000)in p3)&((floor p6%10000)in p2)&(floor p6%100000)in p1];
  sum r}
+
+/Pandigital multiples                                                \t 7
+p038:{
+ n:1111 2#0; n[;0]:9,(90+til 10),(900+til 100),9000+til 1000; n[;1]:n[;0]*2; n:n[where 999<n[;0]];
+ c:flip (Dfi each n[;0]),'Dfi each n[;1];
+ c:c[;(til count c[0;])[where not sum c=0]];
+ i:1; do[9; c:c[;(til count c[0;])[where max c=i]]; i+:1];
+ max 10 sv c}
