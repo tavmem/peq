@@ -249,7 +249,7 @@ p039:{
 /Champernowne's constant                                             \t 568
 p040:{prd eval parse raze " ",'(raze string til floor 1e6)@floor 10 xexp til 7}
 
-/Pandigital prime
+/Pandigital prime                                                    \t 3152
 p041:{
  p:Primes floor 8e6; 
  p:p[where (1234566<p)&p<7654322];
@@ -257,3 +257,5 @@ p041:{
  i:1; do[7; r:r[;(til count r[0;])[where max r=i]]; i+:1];
  max 10 sv r}
 
+/Coded triangel numbers                                              \t 7
+p042:{sum ((sum -64+"i"$)each eval parse "(",ssr[raze read0 `t042.txt;",";";"],")")in{floor .5*x*1+x}@til 99}
