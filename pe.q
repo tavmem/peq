@@ -204,14 +204,14 @@ p035:{
  r:2 3 5 7 11 13 17 31 37 71 73 79 97;
  p:Primes floor 1e6; p:p[where p>100]; p:p[where min each (Dfi each p)mod 2];
  a:p[where (99<p)&p<1000]; s:(2,count a)#0; s[0;]:(100*a mod 10)+floor a%10;
-  s[1;]:(100*s[0;] mod 10)+floor s[0;]%10; r:r,a[where min s in a];
+  s[1;]:(100*s[0;] mod 10)+floor s[0;]%10; r,:a[where min s in a];
  a:p[where (999<p)&p<10000]; s:(3,count a)#0; s[0;]:(1000*a mod 10)+floor a%10;
-  i:0; do[2; s[i+1;]:(1000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r:r,a[where min s in a];
+  i:0; do[2; s[i+1;]:(1000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r,:a[where min s in a];
  a:p[where (9999<p)&p<100000]; s:(4,count a)#0; s[0;]:(10000*a mod 10)+floor a%10;
-  i:0; do[3; s[i+1;]:(10000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r:r,a[where min s in a];
+  i:0; do[3; s[i+1;]:(10000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r,:a[where min s in a];
  a:p[where 99999<p]; s:(5,count a)#0; s[0;]:(100000*a mod 10)+floor a%10;
-  i:0; do[4; s[i+1;]:(100000*s[i;] mod 10)+floor s[i;]%10; i+:1]; r:r,a[where min s in a];
- count r}
+  i:0; do[4; s[i+1;]:(100000*s[i;] mod 10)+floor s[i;]%10; i+:1];
+ count r,:a[where min s in a]}
 
 /Double-base palindromes                                            \t 3094
 p036:{sum d@where p each Bdfi each d:where(p:{x~reverse x})each Dfi each til 1000000}
@@ -257,5 +257,5 @@ p041:{
  i:1; do[7; r:r[;(til count r[0;])[where max r=i]]; i+:1];
  max 10 sv r}
 
-/Coded triangel numbers                                              \t 7
+/Coded triangle numbers                                              \t 7
 p042:{sum ((sum -64+"i"$)each eval parse "(",ssr[raze read0 `t042.txt;",";";"],")")in{floor .5*x*1+x}@til 99}
