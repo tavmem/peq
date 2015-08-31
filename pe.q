@@ -266,8 +266,8 @@ p041:{
 /Coded triangle numbers                                              \t 7
 p042:{sum ((sum -64+"i"$)each eval parse "(",ssr[raze read0 `t042.txt;",";";"],")")in{floor .5*x*1+x}@til 99}
 
-/Sub-string divisibility
-p043:{                                                               \t 11
+/Sub-string divisibility                                             \t 11
+p043:{
  r:Dpi[3;17*til 59];
   d:Dpi[3;13*til 77]; a:d mod 100; b:floor r%10; e:d[where a in b]; f:r[where b in a];
  r:(f mod 10)+e[(e mod 100)?floor f%10]*10; r:Dpi[4;r];
