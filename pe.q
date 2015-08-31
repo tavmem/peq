@@ -1,7 +1,7 @@
 /DESIGN CRITERIA
 / 1. Correct result (obviously)
 / 2. Speed (timings are on a 32-bit Pentium-4)
-/ 3. Space used (runs with only 2G ram)
+/ 3. Space (32-bit address space)
 / 4. Style
 
 
@@ -30,6 +30,12 @@ Dfi:{"J"$(string x),'" "}
 
 /Binary digits from integer
 Bdfi:{Dfi raze (where b)_ b:0b vs x}
+
+/padded Digits from integer
+pDfi:{(neg x)#(x#0),"J"$(string y),'" "}
+
+/Distict padded integers 
+Dpi:{c:count each distinct each pDfi[x;] each y; y[where c=max c]}
 
 
 /PROBLEMS
@@ -260,6 +266,23 @@ p041:{
 /Coded triangle numbers                                              \t 7
 p042:{sum ((sum -64+"i"$)each eval parse "(",ssr[raze read0 `t042.txt;",";";"],")")in{floor .5*x*1+x}@til 99}
 
-\
-notes:
-+/0.0$',/'$q@&{~+/(10_sv'x(1+!7)+\:!3)!'2 3 5 7 11 13 17}'q:{:[1<x;,/(>:'(x,x)#1,x#0)[;0,'1+_f x-1];(1,x)#!x]}10
+/Sub-string divisibility
+p043:{                                                               \t 11
+ r:Dpi[3;17*til 59];
+  d:Dpi[3;13*til 77]; a:d mod 100; b:floor r%10; e:d[where a in b]; f:r[where b in a];
+ r:(f mod 10)+e[(e mod 100)?floor f%10]*10; r:Dpi[4;r];
+  d:Dpi[3;11*til 91]; a:d mod 100; b:floor r%100; e:d[where a in b]; f:r[where b in a];
+ r:(f mod 100)+e[(e mod 100)?floor f%100]*100; r:Dpi[5;r];
+  d:Dpi[3;7*til 143]; a:d mod 100; b:floor r%1000; e:d[where a in b]; f:r[where b in a];
+  a:0; b:0#0; while[a<count e; b,:f[(floor f%1000)?e[a]mod 100]; a+:1];
+ r:(b mod 1000)+e*1000; r:Dpi[6;r];
+  d:Dpi[3;5*til 200]; a:d mod 100; b:floor r%10000; e:d[where a in b]; f:r[where b in a];
+  a:0; b:0#0; while[a<count e; b,:f[(floor f%10000)?e[a]mod 100]; a+:1];
+ r:(b mod 10000)+e*10000; r:Dpi[7;r];
+  d:Dpi[3;3*til 334]; a:d mod 100; b:floor r%1e5; e:d[where a in b]; f:r[where b in a];
+  a:0; b:0#0; while[a<count e; b,:f[(floor f%1e5)?e[a] mod 100]; a+:1];
+ r:floor(b mod 1e5)+e*1e5; r:Dpi[8;r];
+  d:Dpi[3;2*til 500]; a:d mod 100; b:floor r%1e6; e:d[where a in b]; f:r[where b in a];
+  a:0; b:0#0; while[a<count e; b,:f[(floor f%1e6)?e[a]mod 100]; a+:1];
+ r:floor(b mod 1e6)+e*1e6; r:Dpi[9;r];
+ floor sum r + 4 4 4 1 1 1 *1e9}
