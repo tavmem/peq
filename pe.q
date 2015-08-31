@@ -245,3 +245,6 @@ p039:{
  P:p@where 1000>p;
  e:value group P;
  first P e@first reverse iasc count each e}
+
+/Champernowne's constant                                             \t 568
+p040:{prd eval parse raze " ",'(raze string til floor 1e6)@floor 10 xexp til 7}
