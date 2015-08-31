@@ -230,10 +230,18 @@ p037:{
     &((floor p6%10)in p5)&((floor p6%100)in p4)&((floor p6%1000)in p3)&((floor p6%10000)in p2)&(floor p6%100000)in p1];
  sum r}
 
-/Pandigital multiples                                                \t 7
+/Pandigital multiples                                                \t 6
 p038:{
- n:1111 2#0; n[;0]:9,(90+til 10),(900+til 100),9000+til 1000; n[;1]:n[;0]*2; n:n[where 999<n[;0]];
+ n:9000+til 1000; n:n,'n*2;
  c:flip (Dfi each n[;0]),'Dfi each n[;1];
  c:c[;(til count c[0;])[where not sum c=0]];
  i:1; do[9; c:c[;(til count c[0;])[where max c=i]]; i+:1];
  max 10 sv c}
+
+/Integer right triangles                                             \t 359
+p039:{
+ b:sqrt sum each t*t:n cross n:til 499;
+ p:sum each(t,'floor b)@where{x=floor x}b;
+ P:p@where 1000>p;
+ e:value group P;
+ first P e@first reverse iasc count each e}
