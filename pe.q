@@ -259,3 +259,7 @@ p041:{
 
 /Coded triangle numbers                                              \t 7
 p042:{sum ((sum -64+"i"$)each eval parse "(",ssr[raze read0 `t042.txt;",";";"],")")in{floor .5*x*1+x}@til 99}
+
+\
+notes:
++/0.0$',/'$q@&{~+/(10_sv'x(1+!7)+\:!3)!'2 3 5 7 11 13 17}'q:{:[1<x;,/(>:'(x,x)#1,x#0)[;0,'1+_f x-1];(1,x)#!x]}10
