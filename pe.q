@@ -264,21 +264,11 @@ p041:{
  max 10 sv r}
 
 /Coded triangle numbers                                              \t 7
-p042:{sum ((sum -64+"i"$)each eval parse "(",ssr[raze read0 `t042.txt;",";";"],")")in{floor .5*x*1+x}@til 99}
+p042:{"j"$sum ((sum -64+"j"$)each eval parse "(",ssr[raze read0 `t042.txt;",";";"],")")in{floor .5*x*1+x}@til 99}
 
 /Sub-string divisibility                                             \t 6
 p043:{
- r:Dpi[3;17*til 59];
-  d:Dpi[3;13*til 77]; a:d mod 100; b:floor r%1e1; e:d[where a in b]; f:r[where b in a];
- r:floor(f mod 1e1)+e[(e mod 100)?floor f%10]*10; r:Dpi[4;r];
-  d:Dpi[3;11*til 91]; a:d mod 100; b:floor r%1e2; e:d[where a in b]; f:r[where b in a];
- r:floor(f mod 1e2)+e[(e mod 100)?floor f%100]*100; r:Dpi[5;r];
-  d:Dpi[3;7*til 143]; a:d mod 100; b:floor r%1e3; e:d[where a in b]; f:r[where b in a]; b:f[(floor f%1e3)?e mod 100];
- r:floor(b mod 1e3)+e*1000; r:Dpi[6;r];
-  d:Dpi[3;5*til 200]; a:d mod 100; b:floor r%1e4; e:d[where a in b]; f:r[where b in a]; b:f[(floor f%1e4)?e mod 100];
- r:floor(b mod 1e4)+e*10000; r:Dpi[7;r];
-  d:Dpi[3;3*til 334]; a:d mod 100; b:floor r%1e5; e:d[where a in b]; f:r[where b in a]; b:f[(floor f%1e5)?e mod 100];
- r:floor(b mod 1e5)+e*1e5; r:Dpi[8;r];
-  d:Dpi[3;2*til 500]; a:d mod 100; b:floor r%1e6; e:d[where a in b]; f:r[where b in a]; b:f[(floor f%1e6)?e mod 100];
- r:floor(b mod 1e6)+e*1e6; r:Dpi[9;r];
+ s:(17*til 59; 13*til 77; 11*til 91; 7*til 143; 5*til 200; 3*til 334; 2*til 500); r:Dpi[3;s[0]]; i:1;
+ do[6; d:Dpi[3;s[i]]; a:d mod 100; b:floor r%p:10 xexp i; c:r[where b in a]; e:d[where a in b]; b:c[(floor c%p)?e mod 100];
+  r:Dpi[i+3;floor(b mod p)+e*p]; i+:1];
  floor sum r + 4 4 4 1 1 1 *1e9}
