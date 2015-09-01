@@ -285,3 +285,10 @@ p045:{
  t:{floor .5*x*x+1}til 80000; p:{floor .5*x*-1+3*x}til 47000; h:{floor x*-1+2*x}til 41000;
  a:t[where t in h]; b:t[where t in p];
  first reverse a[where a in b]}
+
+/Goldbach's other conjecture
+p046:{
+ p:Primes floor 1e4;
+ c:1+2*til 3000; c:c[where not c in p]; k:7; j:0;
+ while[k<count c; q:p[where p<c[k]]; a:sqrt .5*c[k]-q; k+:1; if[1=min a<>floor a; j:k; k:count c]];
+ c[j-1]}
