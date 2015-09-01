@@ -272,3 +272,10 @@ p043:{
  do[6; d:Dpi[3;s[i]]; a:d mod 100; b:floor r%p:10 xexp i; c:r[where b in a]; e:d[where a in b]; b:c[(floor c%p)?e mod 100];
   r:Dpi[i+3;floor(b mod p)+e*p]; i+:1];
  floor sum r + 4 4 4 1 1 1 *1e9}
+
+/Pentagon numbers                                                    \t 737
+p044:{
+ n:1+til 5000; p:floor .5*n*-1+3*n; q:(floor .5*count p)#p; k:r:0; 
+ while[(r=0)&k<count q; s:q+q[k]; d:abs q-q[k]; S:(1+sqrt 1+24*s)%6; D:(1+sqrt 1+24*d)%6;
+  c:q[where (S=floor S)&D=floor D]; if[0<count c; r:first abs c-q[k]]; k+:1];
+ r}
