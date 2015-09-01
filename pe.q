@@ -279,3 +279,9 @@ p044:{
  while[(r=0)&k<count q; s:q+q[k]; d:abs q-q[k]; S:(1+sqrt 1+24*s)%6; D:(1+sqrt 1+24*d)%6;
   c:q[where (S=floor S)&D=floor D]; if[0<count c; r:first abs c-q[k]]; k+:1];
  r}
+
+/Triangular, pentagonal and hexagonal                                \t 56
+p045:{
+ t:{floor .5*x*x+1}til 80000; p:{floor .5*x*-1+3*x}til 47000; h:{floor x*-1+2*x}til 41000;
+ a:t[where t in h]; b:t[where t in p];
+ first reverse a[where a in b]}
