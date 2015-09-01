@@ -286,9 +286,15 @@ p045:{
  a:t[where t in h]; b:t[where t in p];
  first reverse a[where a in b]}
 
-/Goldbach's other conjecture
+/Goldbach's other conjecture                                         \t 151
 p046:{
  p:Primes floor 1e4;
  c:1+2*til 3000; c:c[where not c in p]; k:7; j:0;
  while[k<count c; q:p[where p<c[k]]; a:sqrt .5*c[k]-q; k+:1; if[1=min a<>floor a; j:k; k:count c]];
  c[j-1]}
+
+/Distinct primes factors                                              \t 2284
+p047:{
+ p:Primes 45000;
+ c:{count a[where a=floor a:y%x]}[p;]each n:130000+til 5000;
+ first n[where (4=c)&(4=1_c,0)&(4=2_ c,0 0)&4=3_ c,0 0 0]}
