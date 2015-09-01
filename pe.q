@@ -298,3 +298,12 @@ p047:{
  p:Primes 45000;
  c:{count a[where a=floor a:y%x]}[p;]each n:130000+til 5000;
  first n[where (4=c)&(4=1_c,0)&(4=2_ c,0 0)&4=3_ c,0 0 0]}
+
+/Self powers                                                          \t 969
+p048:{
+ n:1000; a:1+til n; i:j:0;
+ while[i<n;
+  while[j<i; a[i]:(floor a[i]*i+1)mod 10000000000; j+:1]; j:0; i+:1];
+ i:t:0;
+ while[i<n; t:(t+a[i])mod 10000000000; i+:1];
+ t}
