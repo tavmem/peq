@@ -5,39 +5,6 @@
 / 4. Style
 
 
-/UTILITY FUNCTIONS
-
-/primes below x
-Pr:{@[x#1; y*til each neg floor neg x%y; :; 0]}
-Primes:{[s;n]$[n<4; enlist 2; r,1_where s[n]r:.z.s[s]@neg floor neg sqrt n]}[Pr;]
-
-/next term in Collatz sequence
-Clz:{$[x mod 2;1+3*x;floor x%2]}
-
-/each pair
-echPr:{$[1<count x; flip (-1_ x),'1_ x; x]}
-
-/days by month in any year
-Dbmiy:{
- m:31 28 31 30 31 30 31 31 30 31 30 31;
- @[m;1;+;{(not x mod 400)|(not x mod 4)&(not not x mod 100)}x]}
-
-/sorted Distinct floats 
-sDfl:{n[where n<>-1_0,n:x[iasc x]]}
-
-/Digits from integer
-Dfi:{"J"$(string x),'" "}
-
-/Binary digits from integer
-Bdfi:{Dfi raze (where b)_ b:0b vs x}
-
-/padded Digits from integer
-pDfi:{(neg x)#(x#0),"J"$(string y),'" "}
-
-/Distict padded integers 
-Dpi:{c:count each distinct each pDfi[x;] each y; y[where c=max c]}
-
-
 /PROBLEMS
 
 /Multiples of 3 and 5                                               \t 0
@@ -65,6 +32,8 @@ p005:{prd 2 2 2 2 3 3 5 7 11 13 17 19}
 p006:{floor((sum a) xexp 2)-sum a*a:1+til 100}
 
 /10001st prime                                                      \t 15
+Pr:{@[x#1; y*til each neg floor neg x%y; :; 0]}
+Primes:{[s;n]$[n<4; enlist 2; r,1_where s[n]r:.z.s[s]@neg floor neg sqrt n]}[Pr;]
 p007:{a:Primes 105000; a[10000]}
 
 /Largest product in a series                                        \t 1
@@ -104,6 +73,7 @@ p013:{
  "J"$10#s}
 
 /Longest Collatz sequence                                           \t 9133
+Clz:{$[x mod 2;1+3*x;floor x%2]}  /next term
 p014:{
  a:{
   C:-1 1,(x-2)#0; i:0;
@@ -126,15 +96,15 @@ p017:{
  sum count each m,:m[1],"thousand"}
 
 /Maximum path sum I                                                 \t 0
+echPr:{$[1<count x; flip (-1_ x),'1_ x; x]}   /each pair
 p018:{
  t:read0 `t018.txt;
  n:15#(::); n[0]:"J"$t[0]; i:1; do[14; n[i]:"J"$3 cut t[i]; i+:1]; n:reverse n;
  first 0{y+max echPr x}/n}
 
 /Counting Sundays                                                   \t 1
-p019:{
- n:0+\raze Dbmiy each 1900+til 101;
- count n@where(6=n mod 7)&n>365}
+Dbmiy:{m:31 28 31 30 31 30 31 31 30 31 30 31; @[m;1;+;{(not x mod 400)|(not x mod 4)&(not not x mod 100)}x]}
+p019:{n:0+\raze Dbmiy each 1900+til 101; count n@where(6=n mod 7)&n>365}
 
 /Factorial digit sum                                                \t 3
 p020:{
@@ -181,9 +151,11 @@ p027:{
 p028:{1+sum {(4*x*x)+(-6*x)+6}each 3+2*til 500}
 
 /Distinct powers                                                    \t 8
+sDfl:{n[where n<>-1_0,n:x[iasc x]]} /sorted Distict floats
 p029:{count sDfl raze n xexp/:n:2+til 99}
 
 /Digit fifth powers                                                 \t 2330
+Dfi:{"J"$(string x),'" "} /Digits from integer
 p030:{sum 2_ where{x=sum(Dfi x)xexp 5}each til floor 6*9 xexp 5}
 
 /Coin sums                                                          \t 5041
@@ -220,6 +192,8 @@ p035:{
  count r,:a[where min s in a]}
 
 /Double-base palindromes                                            \t 3094
+pDfi:{(neg x)#(x#0),"J"$(string y),'" "} /padded Digits from integer
+Bdfi:{Dfi raze (where b)_ b:0b vs x} /Binary digits from integer
 p036:{sum d@where p each Bdfi each d:where(p:{x~reverse x})each Dfi each til 1000000}
 
 /Truncatable primes                                                 \t 247
@@ -267,6 +241,7 @@ p041:{
 p042:{"j"$sum ((sum -64+"j"$)each eval parse "(",ssr[raze read0 `t042.txt;",";";"],")")in{floor .5*x*1+x}@til 99}
 
 /Sub-string divisibility                                             \t 6
+Dpi:{c:count each distinct each pDfi[x;] each y; y[where c=max c]} /Distict padded integers
 p043:{
  s:(17*til 59; 13*til 77; 11*til 91; 7*til 143; 5*til 200; 3*til 334; 2*til 500); r:Dpi[3;s[0]]; i:1;
  do[6; d:Dpi[3;s[i]]; a:d mod 100; b:floor r%p:10 xexp i; c:r[where b in a]; e:d[where a in b]; b:c[(floor c%p)?e mod 100];
