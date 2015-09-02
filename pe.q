@@ -32,9 +32,9 @@ p005:{prd 2 2 2 2 3 3 5 7 11 13 17 19}
 p006:{floor((sum a) xexp 2)-sum a*a:1+til 100}
 
 /10001st prime                                                      \t 15
+p007:{a:Primes 105000; a[10000]}
 Pr:{@[x#1; y*til each neg floor neg x%y; :; 0]}
 Primes:{[s;n]$[n<4; enlist 2; r,1_where s[n]r:.z.s[s]@neg floor neg sqrt n]}[Pr;]
-p007:{a:Primes 105000; a[10000]}
 
 /Largest product in a series                                        \t 1
 p008:{
@@ -73,13 +73,13 @@ p013:{
  "J"$10#s}
 
 /Longest Collatz sequence                                           \t 9133
-Clz:{$[x mod 2;1+3*x;floor x%2]}  /next term
 p014:{
  a:{
   C:-1 1,(x-2)#0; i:0;
   do[x; if[not C@i; b:where x>j:((i-1)<)Clz\i; C[j@b]:C[first reverse j]+(reverse til count j)@b]; i+:1];
   C}@1000000;
  a?max a}
+Clz:{$[x mod 2;1+3*x;floor x%2]}  /next term
 
 /Lattice paths. (Binomial coefficient reduction)                    \t 0 
 p015:{prd 2 13 2 37 33 31 29 5 23 21}
@@ -96,15 +96,15 @@ p017:{
  sum count each m,:m[1],"thousand"}
 
 /Maximum path sum I                                                 \t 0
-echPr:{$[1<count x; flip (-1_ x),'1_ x; x]}   /each pair
 p018:{
  t:read0 `t018.txt;
  n:15#(::); n[0]:"J"$t[0]; i:1; do[14; n[i]:"J"$3 cut t[i]; i+:1]; n:reverse n;
  first 0{y+max echPr x}/n}
+echPr:{$[1<count x; flip (-1_ x),'1_ x; x]}   /each pair
 
 /Counting Sundays                                                   \t 1
-Dbmiy:{m:31 28 31 30 31 30 31 31 30 31 30 31; @[m;1;+;{(not x mod 400)|(not x mod 4)&(not not x mod 100)}x]}
 p019:{n:0+\raze Dbmiy each 1900+til 101; count n@where(6=n mod 7)&n>365}
+Dbmiy:{m:31 28 31 30 31 30 31 31 30 31 30 31; @[m;1;+;{(not x mod 400)|(not x mod 4)&(not not x mod 100)}x]}
 
 /Factorial digit sum                                                \t 3
 p020:{
@@ -151,12 +151,12 @@ p027:{
 p028:{1+sum {(4*x*x)+(-6*x)+6}each 3+2*til 500}
 
 /Distinct powers                                                    \t 8
-sDfl:{n[where n<>-1_0,n:x[iasc x]]} /sorted Distict floats
 p029:{count sDfl raze n xexp/:n:2+til 99}
+sDfl:{n[where n<>-1_0,n:x[iasc x]]} /sorted Distict floats
 
 /Digit fifth powers                                                 \t 2330
-Dfi:{"J"$(string x),'" "} /Digits from integer
 p030:{sum 2_ where{x=sum(Dfi x)xexp 5}each til floor 6*9 xexp 5}
+Dfi:{"J"$(string x),'" "} /Digits from integer
 
 /Coin sums                                                          \t 5041
 p031:{{$[x=0; :1; (x<0)|y=0; :0; .z.s[x;y-1]+.z.s[x-(1 2 5 10 20 50 100 200)[y-1];y]]}[200;8]}
@@ -192,8 +192,8 @@ p035:{
  count r,:a[where min s in a]}
 
 /Double-base palindromes                                            \t 3094
-Bdfi:{Dfi raze (where b)_ b:0b vs x} /Binary digits from integer
 p036:{sum d@where p each Bdfi each d:where(p:{x~reverse x})each Dfi each til 1000000}
+Bdfi:{Dfi raze (where b)_ b:0b vs x} /Binary digits from integer
 
 /Truncatable primes                                                 \t 247
 p037:{
@@ -240,13 +240,13 @@ p041:{
 p042:{"j"$sum ((sum -64+"j"$)each eval parse "(",ssr[raze read0 `t042.txt;",";";"],")")in{floor .5*x*1+x}@til 99}
 
 /Sub-string divisibility                                             \t 6
-pDfi:{(neg x)#(x#0),"J"$(string y),'" "} /padded Digits from integer
-Dpi:{c:count each distinct each pDfi[x;] each y; y[where c=max c]} /Distict padded integers
 p043:{
  s:(17*til 59; 13*til 77; 11*til 91; 7*til 143; 5*til 200; 3*til 334; 2*til 500); r:Dpi[3;s[0]]; i:1;
  do[6; d:Dpi[3;s[i]]; a:d mod 100; b:floor r%p:10 xexp i; c:r[where b in a]; e:d[where a in b]; b:c[(floor c%p)?e mod 100];
   r:Dpi[i+3;floor(b mod p)+e*p]; i+:1];
  floor sum r + 4 4 4 1 1 1 *1e9}
+pDfi:{(neg x)#(x#0),"J"$(string y),'" "} /padded Digits from integer
+Dpi:{c:count each distinct each pDfi[x;] each y; y[where c=max c]} /Distict padded integers
 
 /Pentagon numbers                                                    \t 737
 p044:{
@@ -281,32 +281,32 @@ p048:{
  i:t:0; while[i<n; t:(t+a[i])mod 10000000000; i+:1];
  t}
 
-/Prime permutations                                                   \t 4115
-cull:{
- a:flip pDfi[4;]each x[;0]; b:flip pDfi[4;]each x[;1]; c:flip pDfi[4;]each x[;2];
- s:(count a),count a[0]; A0:s#a[0;]; A1:s#a[1;]; A2:s#a[2;]; A3:s#a[3;];
- j0:sum a=A0; j1:sum a=A1; j2:sum a=A2; j3:sum a=A3;
- a:(j0=sum b=A0)&(j0=sum c=A0)&(j1=sum b=A1)&(j1=sum c=A1)&(j2=sum b=A2)&(j2=sum c=A2)&(j3=sum b=A3)&j3=sum c=A3;
- x:x[where a]}; 
+/Prime permutations                                                   \t 4115 
 p049:{
  p:Primes 10000; p:p[where p>999]; m:p,'p,'p; k:1;
  while[k<9000; v:m; v[;1]:p+k; v[;2]:floor p+2*k; v:v[where (v[;1]in p)&v[;2]in p];
   if[0<count v; v:cull v];
   k+:1; if[0<count v; k:9000];];
  raze 1_ v}
+cull:{
+ a:flip pDfi[4;]each x[;0]; b:flip pDfi[4;]each x[;1]; c:flip pDfi[4;]each x[;2];
+ s:(count a),count a[0]; A0:s#a[0;]; A1:s#a[1;]; A2:s#a[2;]; A3:s#a[3;];
+ j0:sum a=A0; j1:sum a=A1; j2:sum a=A2; j3:sum a=A3;
+ a:(j0=sum b=A0)&(j0=sum c=A0)&(j1=sum b=A1)&(j1=sum c=A1)&(j2=sum b=A2)&(j2=sum c=A2)&(j3=sum b=A3)&j3=sum c=A3;
+ x:x[where a]};
 
 /Consecutive prime sum                                                \t 231
 / 546 is the most consecutive primes for which the sum is < 1e6    sum 546#p   evaluates to 997661 (not prime)
-tstSum:{ t:((x-1)_y)-0,(neg x)_y; t:t[where y<1e6]; max t[where t in z]}
 p050:{
  p:Primes floor 1e6; s:sums p; i:545;
  while[0>r:tstSum[i;s;p]; i-:1];
  max r}
+tstSum:{ t:((x-1)_y)-0,(neg x)_y; t:t[where y<1e6]; max t[where t in z]}
 
 /Prime digit replacements                                             \t 2693
-pset:{(enlist ()){x,x,\:y}/x};
-fmls:{@[x; ; :; "n"]each raze 1_' pset each value group x};
 p051:{
  p:Primes floor 1e6;
  s:raze (distinct f)@where 8=count each value group f:raze fmls each string p;
  eval parse ssr[s;"n";"1"]}
+pset:{(enlist ()){x,x,\:y}/x};
+fmls:{@[x; ; :; "n"]each raze 1_' pset each value group x}
