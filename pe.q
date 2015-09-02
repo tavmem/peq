@@ -281,7 +281,7 @@ p048:{
  i:t:0; while[i<n; t:(t+a[i])mod 10000000000; i+:1];
  t}
 
-/Prime permutations                                                   \t 232
+/Prime permutations                                                   \t 4115
 cull:{
  a:flip pDfi[4;]each x[;0]; b:flip pDfi[4;]each x[;1]; c:flip pDfi[4;]each x[;2];
  s:(count a),count a[0]; A0:s#a[0;]; A1:s#a[1;]; A2:s#a[2;]; A3:s#a[3;];
