@@ -245,7 +245,7 @@ p043:{
  do[6; d:Dpi[3;s[i]]; a:d mod 100; b:floor r%p:10 xexp i; c:r[where b in a]; e:d[where a in b]; b:c[(floor c%p)?e mod 100];
   r:Dpi[i+3;floor(b mod p)+e*p]; i+:1];
  floor sum r + 4 4 4 1 1 1 *1e9}
-pDfi:{(neg x)#(x#0),"J"$(string y),'" "} /padded Digits from integer
+pDfi:{(neg x)#(x#0),"J"$(string y),'" "} /padded Digits from integer (arbitrary number=x)
 Dpi:{c:count each distinct each pDfi[x;] each y; y[where c=max c]} /Distict padded integers
 
 /Pentagon numbers                                                    \t 737
@@ -309,5 +309,5 @@ p051:{
  p:Primes floor 1e6;
  s:raze (distinct f)@where 8=count each value group f:raze fmls each string p;
  eval parse ssr[s;"n";"1"]}
-pset:{(enlist ()){x,x,\:y}/x};
-fmls:{@[x; ; :; "n"]each raze 1_' pset each value group x}
+pset:{(enlist ()){x,x,\:y}/x};  /power set
+fmls:{@[x; ; :; "n"]each raze 1_' pset each value group x}  /families
