@@ -192,7 +192,6 @@ p035:{
  count r,:a[where min s in a]}
 
 /Double-base palindromes                                            \t 3094
-pDfi:{(neg x)#(x#0),"J"$(string y),'" "} /padded Digits from integer
 Bdfi:{Dfi raze (where b)_ b:0b vs x} /Binary digits from integer
 p036:{sum d@where p each Bdfi each d:where(p:{x~reverse x})each Dfi each til 1000000}
 
@@ -241,6 +240,7 @@ p041:{
 p042:{"j"$sum ((sum -64+"j"$)each eval parse "(",ssr[raze read0 `t042.txt;",";";"],")")in{floor .5*x*1+x}@til 99}
 
 /Sub-string divisibility                                             \t 6
+pDfi:{(neg x)#(x#0),"J"$(string y),'" "} /padded Digits from integer
 Dpi:{c:count each distinct each pDfi[x;] each y; y[where c=max c]} /Distict padded integers
 p043:{
  s:(17*til 59; 13*til 77; 11*til 91; 7*til 143; 5*til 200; 3*til 334; 2*til 500); r:Dpi[3;s[0]]; i:1;
@@ -296,12 +296,11 @@ p049:{
  raze 1_ v}
 
 /Consecutive prime sum                                                \t 187
-/ 4724 is the largest index of p for which a sequence of 22 primes adds to just over 1e6. (by prior analysis)
-/ sum p[4724-21-til 22]  evaluates to 1000098    4724-21 is 4703
 / 546 is the most consecutive primes for which the sum is < 1e6    sum 546#p   evaluates to 997661 (not prime)
+tstSum:{ t:((x-1)_y)-0,(neg x)_y; t:t[where y<1e6]; max t[where t in z]}
 p050:{
- p:Primes floor 1e6; j:543; r:0#0;
- while[j<547; k:0; while[k<4703; if[(n:sum p[k+til j])in p; r,:n]; $[n>1e6; k:4703; k+:1]]; j+:1];
+ p:Primes floor 1e6; s:sums p; i:545;
+ while[0>r:tstSum[i;s;p]; i-:1];
  max r}
 
 /Prime digit replacements                                             \t 2693
