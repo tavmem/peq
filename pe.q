@@ -307,3 +307,17 @@ p048:{
  i:t:0;
  while[i<n; t:(t+a[i])mod 10000000000; i+:1];
  t}
+
+/Prime permutations                                                   \t 5524
+cull:{
+ a:flip pDfi[4;]each x[;0]; b:flip pDfi[4;]each x[;1]; c:flip pDfi[4;]each x[;2];
+ s:(count a),count a[0]; A0:s#a[0;]; A1:s#a[1;]; A2:s#a[2;]; A3:s#a[3;];
+ j0:sum a=A0; j1:sum a=A1; j2:sum a=A2; j3:sum a=A3;
+ a:(j0=sum b=A0)&(j0=sum c=A0)&(j1=sum b=A1)&(j1=sum c=A1)&(j2=sum b=A2)&(j2=sum c=A2)&(j3=sum b=A3)&j3=sum c=A3;
+ x:x[where a]}; 
+p049:{
+ p:Primes 10000; p:p[where p>999]; k:1;
+ while[k<9000; v:p,'p,'p; v[;1]:p+k; v[;2]:floor p+2*k; v:v[where (v[;1]in p)&v[;2]in p];
+  if[0<count v; v:cull v];
+  k+:1; if[0<count v; k:9000];];
+ raze 1_ v}
