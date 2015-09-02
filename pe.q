@@ -328,3 +328,11 @@ p050:{
  p:Primes floor 1e6; j:543; r:0#0;
  while[j<547; k:0; while[k<4703; if[(n:sum p[k+til j])in p; r,:n]; $[n>1e6; k:4703; k+:1]]; j+:1];
  max r}
+
+/Prime digit replacements                                             \t 2693
+pset:{(enlist ()){x,x,\:y}/x};
+fmls:{@[x; ; :; "n"]each raze 1_' pset each value group x};
+p051:{
+ p:Primes floor 1e6;
+ s:raze (distinct f)@where 8=count each value group f:raze fmls each string p;
+ eval parse ssr[s;"n";"1"]}
