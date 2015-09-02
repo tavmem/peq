@@ -302,10 +302,8 @@ p047:{
 /Self powers                                                          \t 969
 p048:{
  n:1000; a:1+til n; i:j:0;
- while[i<n;
-  while[j<i; a[i]:(floor a[i]*i+1)mod 10000000000; j+:1]; j:0; i+:1];
- i:t:0;
- while[i<n; t:(t+a[i])mod 10000000000; i+:1];
+ while[i<n; while[j<i; a[i]:(floor a[i]*i+1)mod 10000000000; j+:1]; j:0; i+:1];
+ i:t:0; while[i<n; t:(t+a[i])mod 10000000000; i+:1];
  t}
 
 /Prime permutations                                                   \t 5524
@@ -321,3 +319,12 @@ p049:{
   if[0<count v; v:cull v];
   k+:1; if[0<count v; k:9000];];
  raze 1_ v}
+
+/Consecutive prime sum                                                \t 187
+/ 4724 is the largest index of p for which a sequence of 22 primes adds to just over 1e6. (by prior analysis)
+/ sum p[4724-21-til 22]  evaluates to 1000098    4724-21 is 4703
+/ 546 is the most consecutive primes for which the sum is < 1e6    sum 546#p   evaluates to 997661 (not prime)
+p050:{
+ p:Primes floor 1e6; j:543; r:0#0;
+ while[j<547; k:0; while[k<4703; if[(n:sum p[k+til j])in p; r,:n]; $[n>1e6; k:4703; k+:1]]; j+:1];
+ max r}
