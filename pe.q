@@ -33,8 +33,8 @@ p006:{floor((sum a) xexp 2)-sum a*a:1+til 100}
 
 /10001st prime                                                      \t 15
 p007:{a:Primes 105000; a[10000]}
-Pr:{@[x#1; y*til each neg floor neg x%y; :; 0]}
-Primes:{[s;n]$[n<4; enlist 2; r,1_where s[n]r:.z.s[s]@neg floor neg sqrt n]}[Pr;]
+Siv:{@[x#1; y*til each neg floor neg x%y; :; 0]}
+Primes:{[s;n]$[n<4; enlist 2; r,1_where s[n]r:.z.s[s]@neg floor neg sqrt n]}[Siv;]
 
 /Largest product in a series                                        \t 1
 p008:{
@@ -311,3 +311,6 @@ p051:{
  eval parse ssr[s;"n";"1"]}
 pset:{(enlist ()){x,x,\:y}/x};  /power set
 fmls:{@[x; ; :; "n"]each raze 1_' pset each value group x}  /families
+
+/Permuted multiples                                                   \t 1939
+p052:{i:0; while[not min (1 rotate v)~v:{x@iasc x}each string(2+til 4)*i+:1]; i}
