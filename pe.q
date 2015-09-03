@@ -314,3 +314,8 @@ fmls:{@[x; ; :; "n"]each raze 1_' pset each value group x}  /families
 
 /Permuted multiples                                                   \t 1939
 p052:{i:0; while[not min (1 rotate v)~v:{x@iasc x}each string(2+til 4)*i+:1]; i}
+
+/Combinatoric selections                                              \t 65
+p053:{"j"$sum 1e6<Cmb .'1+{raze x,/:' til each x:til x}100}
+Fac:{prd 1.+til x};
+Cmb:{Fac[x]%Fac[y]*Fac x-y}
