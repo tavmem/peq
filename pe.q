@@ -352,3 +352,11 @@ psum:{ k:0; d:pDfi[200;x];
  while[k<y-1; d:x*d; if[0=k mod 5; j:199; while[j>0; c:floor d[j]%10; d[j]:d[j]mod 10; d[j-1]:d[j-1]+c; j-:1];]; k+:1];
  j:199; while[j>0; c:floor d[j]%10; d[j]:d[j] mod 10; d[j-1]:d[j-1]+c; j-:1];
  sum d}
+
+/Square root convergents
+p057:{
+ s:1002; d2:501#0; d1:(500#0),1; k:3; c:0;
+ while[k<s; d:adj[floor d2+2*d1]; n:adj[d+d1]; if[((n>0)?1b)<(d>0)?1b; c+:1]; d2:d1; d1:d; k+:1];
+ c}
+adj:{k:-1+count a:x; while[k>0; a[k-1]:a[k-1]+floor a[k]%10; a[k]:a[k]mod 10; k-:1]; a}
+
