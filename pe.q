@@ -1,3 +1,7 @@
+/   \x .z.pi                /default display
+/ .z.pi:{-1 .Q.s1 value x}  /2.3 display
+/ .z.pi:{-1 .Q.s value x}   /2.4 display
+
 /DESIGN CRITERIA
 / 1. Correct result (obviously)
 / 2. Speed (timings are on a 32-bit Pentium-4)
@@ -100,7 +104,7 @@ p018:{
  t:read0 `t018.txt;
  n:15#(::); n[0]:"J"$t[0]; i:1; do[14; n[i]:"J"$3 cut t[i]; i+:1]; n:reverse n;
  first 0{y+max echPr x}/n}
-echPr:{$[1<count x; flip (-1_ x),'1_ x; x]}   /each pair
+echPr:{$[1<count x; flip (-1_a),'1_a:enlist each x; x]}   /each pair
 
 /Counting Sundays                                                   \t 1
 p019:{n:0+\raze Dbmiy each 1900+til 101; count n@where(6=n mod 7)&n>365}
@@ -319,3 +323,18 @@ p052:{i:0; while[not min (1 rotate v)~v:{x@iasc x}each string(2+til 4)*i+:1]; i}
 p053:{"j"$sum 1e6<Cmb .'1+{raze x,/:' til each x:til x}100}
 Fac:{prd 1.+til x};
 Cmb:{Fac[x]%Fac[y]*Fac x-y}
+
+/Poker hands                                                          \t 69
+p054:{hands:{2 5#split[" "]x}each read0 `t054.txt; "j"$sum(>/)each(rateHand each)each hands}
+split:{1_'(where s=x)_ s:x,y};
+ranks:{s@idesc s:flip(count each value group x;"23456789TJQKA"?/:distinct x)}
+flush:{(&/)(=/)each(-1_x),'1_x}
+flattenRanks:{raze(#/)each x}
+straight:{(9 1 1 1~s)|1 1 1 1~s:(-/)each(-1_x),'1_x}
+rateHand:{ / sort the hand, then construct an int with the value
+ r:ranks x[;0]; f:flattenRanks r; s:straight f; fl:flush x[;1];
+  $[s&fl;       16 sv 9,f; 4=first first r; 16 sv 8,f;
+   3 2~r[;0];   16 sv 7,f; fl;              16 sv 6,f;
+   s;           16 sv 5,f; 3=first first r; 16 sv 3,f;
+   2 2 1~r[;0]; 16 sv 2,f; 2=first first r; 16 sv 1,f;
+                16 sv 0,f]}
