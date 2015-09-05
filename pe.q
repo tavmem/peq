@@ -338,3 +338,11 @@ rateHand:{ / sort the hand, then construct an int with the value
    s;           16 sv 5,f; 3=first first r; 16 sv 3,f;
    2 2 1~r[;0]; 16 sv 2,f; 2=first first r; 16 sv 1,f;
                 16 sv 0,f]}
+
+/Lychrel numbers                                                      \ t 1197
+p055:{   /by trial, only 24 reps are needed
+ reps:24; m:(reps,9990)#0; m[0]:pr each 10+til 9990; i:0; do[reps-1; m[i+1]:pr each m[i]; i+:1];
+ "j"$sum not max each flip (pal each)each m}
+pal:{a~reverse a:string x};
+pr:{x+eval parse reverse string x};
+
