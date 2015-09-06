@@ -353,10 +353,18 @@ psum:{ k:0; d:pDfi[200;x];
  j:199; while[j>0; c:floor d[j]%10; d[j]:d[j] mod 10; d[j-1]:d[j-1]+c; j-:1];
  sum d}
 
-/Square root convergents
+/Square root convergents                                              \t 3526
 p057:{
  s:1002; d2:501#0; d1:(500#0),1; k:3; c:0;
  while[k<s; d:adj[floor d2+2*d1]; n:adj[d+d1]; if[((n>0)?1b)<(d>0)?1b; c+:1]; d2:d1; d1:d; k+:1];
  c}
 adj:{k:-1+count a:x; while[k>0; a[k-1]:a[k-1]+floor a[k]%10; a[k]:a[k]mod 10; k-:1]; a}
 
+/Spiral primes                                                        \t 55054
+p058:{r:fe 2 3 5; while[0<>fa r; r:fe r]; -1+2*first r}
+fa:{not 0.1>x[1]%x 2};
+fb:{not sum not x mod/:(2+p6 bin floor sqrt x)#p6};
+fc:{(1+2*x*-1+2*x)+\0,3#2*x};
+fd:{sum fb each(fc x)};
+fe:{x+(1;fd@first x;4)};
+p6:Primes floor 1e6;
