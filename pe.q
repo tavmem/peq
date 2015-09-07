@@ -369,7 +369,7 @@ fd:{sum fb each(fc x)};
 fe:{x+(1;fd@first x;4)};
 p6:Primes floor 1e6;
 
-/XOR decryption
+/XOR decryption                                                       \t 20291
 p059:{
  c:first read0 `t059.txt; c[where c=","]:" "; c:eval parse c;
  a:128#" "; a[til 32]:"_"; a[32+til 32]:" !\"#$%&'()*+,-./0123456789:;<=>?";
@@ -382,3 +382,9 @@ p059:{
    k:0; j+:1; if[f=1; j:26]; ];
   j:k:0; i+:1; if[f=1; i:26]; ];
  sum a?r}
+
+/Maximum path sum II                                                  \t 4
+p067:{
+ t:read0 `t067.txt;
+ n:100#(::); n[0]:"J"$t[0]; i:1; do[99; n[i]:"J"$3 cut t[i]; i+:1]; n:reverse n;
+ first 0{y+max echPr x}/n}
