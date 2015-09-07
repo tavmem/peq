@@ -368,3 +368,17 @@ fc:{(1+2*x*-1+2*x)+\0,3#2*x};
 fd:{sum fb each(fc x)};
 fe:{x+(1;fd@first x;4)};
 p6:Primes floor 1e6;
+
+/XOR decryption
+p059:{
+ c:first read0 `t059.txt; c[where c=","]:" "; c:eval parse c;
+ a:128#" "; a[til 32]:"_"; a[32+til 32]:" !\"#$%&'()*+,-./0123456789:;<=>?";
+ a[64+til 32]:"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"; a[96+til 32]:"`abcdefghijklmnopqrstuvwxyz{|}~_";
+ C:(-8#)each 0b vs'c; L:"abcdefghijklmnopqrstuvwxyz"; i:j:k:f:0;
+ while[i<26;
+  while[j<26;
+   while[k<26; K:(-8#)each 0b vs'a?(count c)#L[i,j,k]; s:a[(sum(128 64 32 16 8 4 2 1)*)each(C+K)mod 2]; k+:1;
+    if[(&/)not"~%$`" in s; Key:i,j,k-1; k:25+f:1; r:s]; ];
+   k:0; j+:1; if[f=1; j:26]; ];
+  j:k:0; i+:1; if[f=1; i:26]; ];
+ sum a?r}
