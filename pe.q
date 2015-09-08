@@ -411,3 +411,9 @@ p069:{
  a:2 3 5 7 11 13 17; k:0; t:(floor 1e6)#1;
  while[k<count a; b:floor 1e6%a[k]; s:(floor 1e6)#0; s[a[k]*til b]:1; t:t&s; k+:1];
  first 1_ (til floor 1e6)[where t]}
+
+/Ordered fractions
+p071:{
+ k:floor 1e6; n:1; d:3;
+ while[k>999995; a:max(til floor k%2)[where ((til floor k%2)%k)<3%7]; if[(a%k)>n%d; n:a; d:k]; k-:1];
+ n}
