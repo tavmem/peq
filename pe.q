@@ -405,3 +405,9 @@ p067:{
  t:read0 `t067.txt;
  n:100#(::); n[0]:"J"$t[0]; i:1; do[99; n[i]:"J"$3 cut t[i]; i+:1]; n:reverse n;
  first 0{y+max echPr x}/n}
+
+/Totient maximum                                                      \t 227
+p069:{
+ a:2 3 5 7 11 13 17; k:0; t:(floor 1e6)#1;
+ while[k<count a; b:floor 1e6%a[k]; s:(floor 1e6)#0; s[a[k]*til b]:1; t:t&s; k+:1];
+ first 1_ (til floor 1e6)[where t]}
