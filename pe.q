@@ -397,6 +397,9 @@ p062:{
  g:group{x@iasc x}each n;
  eval parse first first n@g[where 5=count each g]}
 
+/Powerful digit counts                                                \t 0
+p063:{"j"$(sum/)(til n)=floor log[(1+til 9)xexp \:/:1+til n:count {0.1<(%/)x}(9 10*)\1 1.]%log 10}
+
 /Maximum path sum II                                                  \t 4
 p067:{
  t:read0 `t067.txt;
