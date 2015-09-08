@@ -383,13 +383,19 @@ p059:{
   j:k:0; i+:1; if[f=1; i:26]; ];
  sum a?r}
 
-/Cyclical figurate numbers
+/Cyclical figurate numbers                                            \t 8
 p061:{
  f:({(x*x+1)%2};{1*x*x};{(x*-1+3*x)%2};{x*-1+2*x};{x*(-3+5*x)%2};{x*-2+3*x});
  r:{floor x[where (999<x)&(x<10000)&9<x mod 100]}each f@/:\:til 1500;
  a:4 1 0 2 3 5 4; b:5 4 1 0 2 3 5; i:0; do[7; r[a[i]]:{x[where(x mod 100) in\:floor y%100]}[r[a[i]];r[b[i]]]; i+:1];
  a:5 3 2 0 1; b:4 5 3 2 0; i:0; do[5; r[a[i]]:{x[where(floor x%100) in\:y mod 100]}[r[a[i]];r[b[i]]]; i+:1];
  sum raze r}
+
+/Cubic permutations                                                   \t 48
+p062:{
+ n:{-13#(12#" "),x}each string "j"$(til 8400)xexp 3;
+ g:group{x@iasc x}each n;
+ eval parse first first n@g[where 5=count each g]}
 
 /Maximum path sum II                                                  \t 4
 p067:{
