@@ -400,6 +400,14 @@ p062:{
 /Powerful digit counts                                                \t 0
 p063:{"j"$(sum/)(til n)=floor log[(1+til 9)xexp \:/:1+til n:count {0.1<(%/)x}(9 10*)\1 1.]%log 10}
 
+/Convergents of e                                                     \t 43
+p065:{
+ v:50 3#1; v[;1]:2*1+til 50; v:100#2,raze v;
+ N:(59#0),1; D:(59#0),-1#v; i:-2+count v;
+ while[i>-1; NN:f65@D*v[i]; N:f65@N+NN; x:D; D:N; N:x; i-:1];
+ sum D}
+f65:{i:59; while[i>0; x[i-1]:x[i-1]+floor x[i]%10; x[i]:x[i] mod 10; i-:1]; x}
+
 /Maximum path sum II                                                  \t 4
 p067:{
  t:read0 `t067.txt;
@@ -412,7 +420,7 @@ p069:{
  while[k<count a; b:floor 1e6%a[k]; s:(floor 1e6)#0; s[a[k]*til b]:1; t:t&s; k+:1];
  first 1_ (til floor 1e6)[where t]}
 
-/Ordered fractions
+/Ordered fractions                                                    \t 195
 p071:{
  k:floor 1e6; n:1; d:3;
  while[k>999995; a:max(til floor k%2)[where ((til floor k%2)%k)<3%7]; if[(a%k)>n%d; n:a; d:k]; k-:1];
