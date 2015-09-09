@@ -430,3 +430,10 @@ upf:{     /unique prime factors
  while[p[k]<=floor m%2; j:1_ p[k]*1+til floor m%p[k]; a[j-2]:a[j-2],'(count j)#p[k]; k+:1];
  a[x-2]}
 tot:{x*raze prd each 1-1%upf x}
+
+/Counting fractions in a range                                        \t 161020
+p073:{"j"$sum raze(sum 1=gd .'gc@)each 1+2_til floor 12000};
+gd:{$[not y; x; .z.s[y;x mod y]]};
+gc:{x,/: gb . ga x};
+gb:{x+til 1+y-x};
+ga:{floor(1+x%3;x*.5)};
