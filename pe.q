@@ -1,6 +1,3 @@
-/   \x .z.pi                /default display
-/ .z.pi:{-1 .Q.s1 value x}  /2.3 display
-/ .z.pi:{-1 .Q.s value x}   /2.4 display
 
 /DESIGN CRITERIA
 / 1. Correct result (obviously)
@@ -425,3 +422,11 @@ p071:{
  k:floor 1e6; n:1; d:3;
  while[k>999995; a:max(til floor k%2)[where ((til floor k%2)%k)<3%7]; if[(a%k)>n%d; n:a; d:k]; k-:1];
  n}
+
+/Counting fractions                                                   \t 4824
+p072:{"j"$first sum tot 2+til -1+floor 1e6}
+upf:{     /unique prime factors
+ m:max x; p:Primes m+1; a:(m-1)#(); a[p-2]:enlist each p; k:0;
+ while[p[k]<=floor m%2; j:1_ p[k]*1+til floor m%p[k]; a[j-2]:a[j-2],'(count j)#p[k]; k+:1];
+ a[x-2]}
+tot:{x*raze prd each 1-1%upf x}
