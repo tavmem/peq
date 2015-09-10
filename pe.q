@@ -444,3 +444,13 @@ f76:{
  $[x<0; :0; x=0; :1; v76[x]<>0; r:v76[x];
   [r:0; k:1; while[k<x+1; r:r+(-1 xexp k+1)*(.z.s[floor x-{.5*x*-1+3*x}k])+.z.s[floor x-{.5*x*-1+3*x}(neg k)]; k+:1]; v76[x]:r]];
  r}
+
+/Path sum:two ways                                                    \t 23
+p081:{
+ m:read0 `t081.txt; d:80 80#0; i:0; do[80; t:m[i]; t[where t=","]:" "; d[i]:eval parse t; i+:1];
+ d[;79]:reverse sums reverse d[;79]; d[79;]:reverse sums reverse d[79;]; j:k:78;
+ while[j>-1;
+  while[k>-1;
+   d[j;k]:d[j;k]+min d[j+1;k],d[j;k+1]; k-:1];
+   k:78; j-:1];
+ d[0;0]}
