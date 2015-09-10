@@ -454,3 +454,11 @@ p081:{
    d[j;k]:d[j;k]+min d[j+1;k],d[j;k+1]; k-:1];
    k:78; j-:1];
  d[0;0]}
+
+/Square digit chains                                                  \t 287361
+p092:{
+ k:0; c:0;
+ while[k<20; a:(k*500000)+1+til 500000; i:til count a;
+  while[0<count i; a[i]:sum each v*v:pDfi[9] each a[i]; i:(til count a)[where not(a=1)|a=89]];
+ c:c+sum a=89; k+:1];
+ c}
