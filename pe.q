@@ -357,14 +357,13 @@ p057:{
  c}
 adj:{k:-1+count a:x; while[k>0; a[k-1]:a[k-1]+floor a[k]%10; a[k]:a[k]mod 10; k-:1]; a}
 
-/Spiral primes                                                        \t 55054
-p058:{r:fe 2 3 5; while[0<>fa r; r:fe r]; -1+2*first r}
+/Spiral primes                                                        \t 54097
+p058:{p:Primes floor 1e6; r:fe[2 3 5;p]; while[0<>fa r; r:fe[r;p]]; -1+2*first r}
 fa:{not 0.1>x[1]%x 2};
-fb:{not sum not x mod/:(2+p6 bin floor sqrt x)#p6};
+fb:{not sum not x mod/:(2+y bin floor sqrt x)#y};
 fc:{(1+2*x*-1+2*x)+\0,3#2*x};
-fd:{sum fb each(fc x)};
-fe:{x+(1;fd@first x;4)};
-p6:Primes floor 1e6;
+fd:{sum fb[;y]each(fc x)};
+fe:{x+(1;fd[first x;y];4)};
 
 /XOR decryption                                                       \t 20291
 p059:{
