@@ -437,3 +437,10 @@ gd:{$[not y; x; .z.s[y;x mod y]]};
 gc:{x,/: gb . ga x};
 gb:{x+til 1+y-x};
 ga:{floor(1+x%3;x*.5)};
+
+/Counting summations                                                  \t 36
+p076:{v76::1.0,100#0; "j"$f76[100]-1}
+f76:{
+ $[x<0; :0; x=0; :1; v76[x]<>0; r:v76[x];
+  [r:0; k:1; while[k<x+1; r:r+(-1 xexp k+1)*(.z.s[floor x-{.5*x*-1+3*x}k])+.z.s[floor x-{.5*x*-1+3*x}(neg k)]; k+:1]; v76[x]:r]];
+ r}
