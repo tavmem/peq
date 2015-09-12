@@ -476,3 +476,7 @@ p097:{
 p099:{
  t:raze " ",/:read0 `t099.txt; t[where t=","]:" "; t:1000 2#eval parse t;
  1+first idesc{x[1]*log first x}each t}
+
+/Bouncy numbers
+p112:{a:(sum f112 100+til 1499900)+sums f112 b:1500000+til 100000; 1500000+(a%b)?.99}
+f112:{{not (x~x[iasc x])|x~x[idesc x]}each string x}
