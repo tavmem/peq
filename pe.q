@@ -400,9 +400,9 @@ p063:{"j"$(sum/)(til n)=floor log[(1+til 9)xexp \:/:1+til n:count {0.1<(%/)x}(9 
 p065:{
  v:50 3#1; v[;1]:2*1+til 50; v:100#2,raze v;
  N:(59#0),1; D:(59#0),-1#v; i:-2+count v;
- while[i>-1; NN:f65@D*v[i]; N:f65@N+NN; x:D; D:N; N:x; i-:1];
+ while[i>-1; NN:s65@D*v[i]; N:s65@N+NN; x:D; D:N; N:x; i-:1];
  sum D}
-f65:{i:59; while[i>0; x[i-1]:x[i-1]+floor x[i]%10; x[i]:x[i] mod 10; i-:1]; x}
+s65:{i:59; while[i>0; x[i-1]:x[i-1]+floor x[i]%10; x[i]:x[i] mod 10; i-:1]; x}
 
 /Maximum path sum II                                                  \t 4
 p067:{
@@ -438,8 +438,8 @@ gb:{x+til 1+y-x};
 ga:{floor(1+x%3;x*.5)};
 
 /Counting summations                                                  \t 36
-p076:{v76::1.0,100#0; "j"$f76[100]-1}
-f76:{
+p076:{v76::1.0,100#0; "j"$s76[100]-1}
+s76:{
  $[x<0; :0; x=0; :1; v76[x]<>0; r:v76[x];
   [r:0; k:1; while[k<x+1; r:r+(-1 xexp k+1)*(.z.s[floor x-{.5*x*-1+3*x}k])+.z.s[floor x-{.5*x*-1+3*x}(neg k)]; k+:1]; v76[x]:r]];
  r}
@@ -478,25 +478,21 @@ p099:{
  1+first idesc{x[1]*log first x}each t}
 
 /Bouncy numbers                                                       \ 6658
-p112:{a:(sum f112 100+til 1499900)+sums f112 b:1500000+til 100000; 1500000+(a%b)?.99}
-f112:{{not (x~x[iasc x])|x~x[idesc x]}each string x}
+p112:{a:(sum s112 100+til 1499900)+sums s112 b:1500000+til 100000; 1500000+(a%b)?.99}
+s112:{{not (x~x[iasc x])|x~x[idesc x]}each string x}
 
 /Concealed square                                                     \t 36
 p206:{
- a:30 70;                                /must end in 30 or 70
- b:raze a+/:\:1e2*til 100;               /last 4 digits
- c:b[where 8=floor((b*b)mod 1e5)%1e4];   / where square ends in 8_9_0
- d:raze c+/:\:floor 1e4*til 100;         /last 6 digits
- e:d[where 7=floor((d*d)mod 1e7)%1e6];   / where square ends in 7_8_9_0
- f:raze e+/:\:floor 1e6*til 100;         /last 8 digits
- g:f[where 6=floor((f*f)mod 1e9)%1e8];   / where square ends in 6_7_8_9_0
- h:raze g+/:\:floor 1e8*til 14;          /last 10 digits
- ub:floor sqrt 1929394959697989900;      / upper bound on square
- lb:floor sqrt 1010000000000000000;      / lower bound on square
- i:h[where (lb<h)&h<ub];                 / prune
- j:i[where 5=floor((i*i)mod 1e11)%1e10]; / where square ends in 5_6_7_8_9_0
- k:j[where 4=floor((j*j)mod 1e13)%1e12]; / where square ends in 4_5_6_7_8_9_0
- l:k[where 3=floor((k*k)mod 1e15)%1e14]; / where square ends in 3_4_5_6_7_8_9_0
- m:l[where 2=floor((l*l)mod 1e17)%1e16]; / where square ends in 2_3_4_5_6_7_8_9_0
- n:m[where 1=floor((m*m)mod 1e19)%1e18]; / where square ends in 1_2_3_4_5_6_7_8_9_0
+ c:s206a[s206[30 70;2;100];8;5];
+ e:s206a[s206[c;4;100];7;7];
+ g:s206a[s206[e;6;100];6;9];
+ h:s206[g;8;14];
+ ub:floor sqrt 1929394959697989900; lb:floor sqrt 1010000000000000000; i:h[where (lb<h)&h<ub];
+ j:s206a[i;5;11];
+ k:s206a[j;4;13];
+ l:s206a[k;3;15];
+ m:s206a[l;2;17];
+ n:s206a[m;1;19];
  "j"$first n}
+s206:{raze x+/:\:(10 xexp y)*til z}
+s206a:{x[where y=floor((x*x)mod 10 xexp z)%10 xexp z-1]}
