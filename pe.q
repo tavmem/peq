@@ -483,20 +483,20 @@ f112:{{not (x~x[iasc x])|x~x[idesc x]}each string x}
 
 /Concealed square                                                     \t 36
 p206:{
- a:30 70;                                  /must end in 30 or 70
- b:raze a+/:\:10e1*til 100;                /last 4 digits
- c:b[where 8=floor((b*b)mod 10e4)%10e3];   / where square ends in 8_9_0
- d:raze c+/:\:floor 10e3*til 100;          /last 6 digits
- e:d[where 7=floor((d*d)mod 10e6)%10e5];   / where square ends in 7_8_9_0
- f:raze e+/:\:floor 10e5*til 100;          /last 8 digits
- g:f[where 6=floor((f*f)mod 10e8)%10e7];   / where square ends in 6_7_8_9_0
- h:raze g+/:\:floor 10e7*til 14;           /last 10 digits
- ub:floor sqrt 1929394959697989900;        / upper bound on square
- lb:floor sqrt 1010000000000000000;        / lower bound on square
- i:h[where (lb<h)&h<ub];                   / prune
- j:i[where 5=floor((i*i)mod 10e10)%10e9];  / where square ends in 5_6_7_8_9_0
- k:j[where 4=floor((j*j)mod 10e12)%10e11]; / where square ends in 4_5_6_7_8_9_0
- l:k[where 3=floor((k*k)mod 10e14)%10e13]; / where square ends in 3_4_5_6_7_8_9_0
- m:l[where 2=floor((l*l)mod 10e16)%10e15]; / where square ends in 2_3_4_5_6_7_8_9_0
- n:m[where 1=floor((m*m)mod 10e18)%10e17]; / where square ends in 1_2_3_4_5_6_7_8_9_0
+ a:30 70;                                /must end in 30 or 70
+ b:raze a+/:\:1e2*til 100;               /last 4 digits
+ c:b[where 8=floor((b*b)mod 1e5)%1e4];   / where square ends in 8_9_0
+ d:raze c+/:\:floor 1e4*til 100;         /last 6 digits
+ e:d[where 7=floor((d*d)mod 1e7)%1e6];   / where square ends in 7_8_9_0
+ f:raze e+/:\:floor 1e6*til 100;         /last 8 digits
+ g:f[where 6=floor((f*f)mod 1e9)%1e8];   / where square ends in 6_7_8_9_0
+ h:raze g+/:\:floor 1e8*til 14;          /last 10 digits
+ ub:floor sqrt 1929394959697989900;      / upper bound on square
+ lb:floor sqrt 1010000000000000000;      / lower bound on square
+ i:h[where (lb<h)&h<ub];                 / prune
+ j:i[where 5=floor((i*i)mod 1e11)%1e10]; / where square ends in 5_6_7_8_9_0
+ k:j[where 4=floor((j*j)mod 1e13)%1e12]; / where square ends in 4_5_6_7_8_9_0
+ l:k[where 3=floor((k*k)mod 1e15)%1e14]; / where square ends in 3_4_5_6_7_8_9_0
+ m:l[where 2=floor((l*l)mod 1e17)%1e16]; / where square ends in 2_3_4_5_6_7_8_9_0
+ n:m[where 1=floor((m*m)mod 1e19)%1e18]; / where square ends in 1_2_3_4_5_6_7_8_9_0
  "j"$first n}
