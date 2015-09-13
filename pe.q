@@ -481,18 +481,11 @@ p099:{
 p112:{a:(sum s112 100+til 1499900)+sums s112 b:1500000+til 100000; 1500000+(a%b)?.99}
 s112:{{not (x~x[iasc x])|x~x[idesc x]}each string x}
 
-/Concealed square                                                     \t 36
+/Concealed square                                                     \t 12
 p206:{
- c:s206a[s206[30 70;2;100];8;5];
- e:s206a[s206[c;4;100];7;7];
- g:s206a[s206[e;6;100];6;9];
- h:s206[g;8;14];
- ub:floor sqrt 1929394959697989900; lb:floor sqrt 1010000000000000000; i:h[where (lb<h)&h<ub];
- j:s206a[i;5;11];
- k:s206a[j;4;13];
- l:s206a[k;3;15];
- m:s206a[l;2;17];
- n:s206a[m;1;19];
- "j"$first n}
+ a:s206a[s206[30 70;2;100];8;5]; b:s206a[s206[a;4;100];7;7]; c:s206a[s206[b;6;100];6;9]; d:s206[c;8;14];
+ e:d[where (d>floor sqrt 1010000000000000000)&d<floor sqrt 1929394959697989900];
+ i:5; j:11; do[5; e:s206a[e;i;j]; i-:1; j+:2];
+ "j"$first e}
 s206:{raze x+/:\:(10 xexp y)*til z}
 s206a:{x[where y=floor((x*x)mod 10 xexp z)%10 xexp z-1]}
