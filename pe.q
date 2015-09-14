@@ -462,15 +462,14 @@ p092:{
  c:c+sum a=89; k+:1];
  c}
 
-/Large non-Mersenne prime                                             \t 24
+/Large non-Mersenne prime                                             \t 43
 /  (1+28433*2 xexp 7830457) is equivalent to 1+28433*2*(16777216 xexp 509)xexp 641
 p097:{
- a:16777216; k:0;
- while[k<508; a:floor((1e0*(a*6)mod 1e10)+(1e1*a mod 1e9)+(1e2*(a*2)mod 1e8)+(1e3*(a*7)mod 1e7)+(1e4*(a*7)mod 1e6) +(1e5*(a*7)mod 1e5)+(1e6*(a*6)mod 1e4)+(1e7*a mod 1e3))mod 1e10; k+:1];
- k:0; b:a; c:pDfi[10;a];
- while[k<640; b:floor ((1e0*(b*c[9])mod 1e10)+(1e1*(b*c[8])mod 1e9)+(1e2*(b*c[7])mod 1e8)+(1e3*(b*c[6])mod 1e7)+(1e4*(b*c[5])mod 1e6)+(1e5*(b*c[4])mod 1e5)+(1e6*(b*c[3])mod 1e4)+(1e7*(b*c[2])mod 1e3)+(1e8*(b*c[1])mod 1e2)+(1e9*(b*c[0])mod 1e1))mod 1e10; k+:1]; 
- d:floor (2*b)mod 1e10;
- 1+floor ((1e0*(d*3)mod 1e10)+(1e1*(d*3)mod 1e9)+(1e2*(d*4)mod 1e8)+(1e3*(d*8)mod 1e7)+(1e4*(d*2)mod 1e6))mod 1e10} 
+ p:s097a n:16777216; k:0; while[k<508; n:floor(sum s097 .' n,/:p )mod 1e10; k+:1];
+ p:s097a n; k:0; while[k<640; n:floor(sum s097 .' n,/:p)mod 1e10; k+:1];
+ n:floor (2*n)mod 1e10; p:s097a 28433; k:0; 1+floor(sum s097 .' n,/:p)mod 1e10}
+s097:{[n;d;a;b](floor 10 xexp a)*(n*d)mod floor 10 xexp b};
+s097a:{c:count d:Dfi x; p:d,'((c-1)-til c),'(11-c)+til c};
 
 /Largest exponential                                                  \t 4
 p099:{
