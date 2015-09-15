@@ -454,13 +454,17 @@ p081:{
    k:78; j-:1];
  d[0;0]}
 
-/Square digit chains                                                  \t 287361
+/Square digit chains                                                  \t 31380
 p092:{
- k:0; c:0;
- while[k<20; a:(k*500000)+1+til 500000; i:til count a;
-  while[0<count i; a[i]:sum each v*v:pDfi[9] each a[i]; i:(til count a)[where not(a=1)|a=89]];
- c:c+sum a=89; k+:1];
- c}
+ b:a:1_ Ndp 10000000; v:"j"$();
+ while[0<count b; b:Ssd Pds b; v,:a[where b=89]; b:b[i:where (b<>1)&b<>89]; a:a[i]];
+ "j"$sum Npr each Pds v}
+Ndp:{a[where a="J"${x[iasc x]}each 1_'string x+a:til x]};  /numbers w distinct permutations below x
+Nln:{floor 10 xexp count string max x};  /Next level number
+Pds:{1_'string Nln[x]+x};  /Padded digit strings
+Nfd:{"J"$" ",'x};  /Numbers from string of digits
+Ssd:{r:((count x),c:count x[0])#0; k:0; while[k<c; r[;k]:Nfd x[;k]; k+:1]; sum each r*r};  /Sum squares of digits
+Npr:{(Fac sum a)%prd Fac each a:count each value group x}  /Number of permutaions
 
 /Large non-Mersenne prime                                             \t 43
 /  (1+28433*2 xexp 7830457) is equivalent to 1+28433*2*(16777216 xexp 509)xexp 641
