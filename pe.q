@@ -430,12 +430,15 @@ upf:{     /unique prime factors
  a[x-2]}
 tot:{x*raze prd each 1-1%upf x}
 
-/Counting fractions in a range                                        \t 161020
-p073:{"j"$sum raze(sum 1=gd .'gc@)each 1+2_til floor 12000};
-gd:{$[not y; x; .z.s[y;x mod y]]};
-gc:{x,/: gb . ga x};
-gb:{x+til 1+y-x};
-ga:{floor(1+x%3;x*.5)};
+/Counting fractions in a range                                        \t 13371
+p073:{
+ c:0; d:2;
+ while[d<=12000;
+  n:(floor d%3)+til 1+(floor d%2)-floor d%3;
+  c+:sum(d>2*n)&(d<3*n)&1=(gcD(enlist((count n)#d)),enlist n)[0];
+  d+:1];
+ c}
+gcD:{while[0<count i:where x[1]<>0; x[;i]:.z.s[(enlist x[1;i]),enlist x[0;i] mod x[1;i]]]; x}
 
 /Counting summations                                                  \t 36
 p076:{v76::1.0,100#0; "j"$s76[100]-1}
