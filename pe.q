@@ -440,6 +440,15 @@ p073:{
  c}
 gcD:{while[0<count i:where x[1]<>0; x[;i]:.z.s[(enlist x[1;i]),enlist x[0;i] mod x[1;i]]]; x}
 
+/Digit factorial chains                                               \t 3629
+p074:{
+ n:Ndp 1000000; r:"j"$(); i:0;
+ do[count n; if[60=cL n[i]; r,:n[i]]; i+:1];
+ "j"$sum Cdfp each r}
+sdF:{sum(1 1 2 6 24 120 720 5040 40320 362880)"J"$(string x),'" "}  /sum of digit Factorials
+cL:{c:"j"$(); n:sdF[x]; while[not n in c; c,:n; n:sdF[n]]; 1+count c} /chain length
+Cdfp:{n:string x; $[not "1" in n; Npr n; (Npr n)+(Fac -1+count n)*-1+count n]}  /Count of digit factorial permutations
+
 /Counting summations                                                  \t 36
 p076:{v76::1.0,100#0; "j"$s76[100]-1}
 s76:{
