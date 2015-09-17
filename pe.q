@@ -456,6 +456,15 @@ s76:{
   [r:0; k:1; while[k<x+1; r:r+(-1 xexp k+1)*(.z.s[floor x-{.5*x*-1+3*x}k])+.z.s[floor x-{.5*x*-1+3*x}(neg k)]; k+:1]; v76[x]:r]];
  r}
 
+/Passcode derivation                                                  \t 0
+p079:{
+ t:read0 `t079.txt; n:((count t),3)#0; i:0; do[3; n[;i]:Nfd t[;i]; i+:1];
+ d:distinct raze n; c:"j"$();
+ do[7; c,:d[where not d in raze 1_'n]; d:d[where not d in c];
+  i:where(first reverse c)=n[;0]; n[i]:1_'n[i]];
+ c,:d[where d in raze n];
+ c}
+
 /Path sum:two ways                                                    \t 23
 p081:{
  m:read0 `t081.txt; d:80 80#0; i:0; do[80; t:m[i]; t[where t=","]:" "; d[i]:eval parse t; i+:1];
