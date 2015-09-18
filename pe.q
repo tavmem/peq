@@ -475,6 +475,12 @@ p081:{
    k:78; j-:1];
  d[0;0]}
 
+/Counting rectangles                                                  \t 17
+p085:{
+ r:{(x*(x+1)*y*y+1)div 4};
+ p:raze(til 100),/:\:til 100;
+ (prd each p)d?min d:abs(r .' p)-2000000}
+
 /Square digit chains                                                  \t 31380
 p092:{
  b:a:1_ Ndp 10000000; v:"j"$();
