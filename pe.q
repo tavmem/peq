@@ -519,3 +519,31 @@ p206:{
  "j"$first e}
 s206:{raze x+/:\:(10 xexp y)*til z}
 s206a:{x[where y=floor((x*x)mod 10 xexp z)%10 xexp z-1]}
+
+/Prime generating integers                                            \t 286123
+p357:{
+ m:100000000; a:m#0b; p:Primes floor sqrt m;
+ i:0; while[i<count p; b:p[i]; a[b+b*1+til -2+floor .5+m%b]:1b; i+:1]; r:"j"$(); j:0;
+ do[10; b:(j*10000000)+til 10000000; c:a[b]; n:b[where(not((1_c),1)) & not a[2+b div 2]]; i:0;
+  while[i<count n; d:1+til floor sqrt n[i]; d:d[where 0=n[i]mod d]; if[min not a[d+floor n[i]%d]; r,:n[i]]; i+:1];
+  j+:1];
+ sum r}
+
+
+\
+/The following C solution to p357 executes in 8.6 seconds vs the above q solution in 4.7 minutes.
+/There may be some further refactoring possible to speed up the q solution.
+
+#include <stdio.h>
+#define N 100000000
+char a[N];
+int main() {
+ int d,i,j,n; long long totsum=1;
+ for(i=2;i<10000;i++) if(!a[i]) for(j=i+i;j<N;j+=i) a[j]=i;
+ for(n=2;n<N-1;n++)
+  if(!a[n+1] && !a[n/2+2]) {
+   for(d=3;d*d<=n;d++) if(n%d==0 && a[d+n/d]) break;
+   if(d*d>n) totsum+=n; }
+ printf("%lld\n",totsum);
+ return 0; }
+
